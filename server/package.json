@@ -8,7 +8,7 @@
   "homepage": "https://github.com/BogdanSabin/DP-TheTinyRoTrain#readme",
   
   "scripts": {
-    "initdb": "node ./scripts/initdb"
+    "createdb": "node ./scripts/createdb"
   },
 
   "dependencies": {

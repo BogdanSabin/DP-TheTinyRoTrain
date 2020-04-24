@@ -2,8 +2,8 @@ const _ = require('lodash');
 const Promise = require('bluebird');
 const reqDir = require('require-dir');
 
-const config = require('./../config/config');
-const connection = require('./../config/dbconnect').connect(config.local.mongodb);
+const config = require('../config/config');
+const connection = require('../config/dbconnect').connect(config.local.mongodb);
 
 connection.on('open', function(){
     console.log("Connected to mongodb");
@@ -13,7 +13,7 @@ connection.on('error', function(error){
     console.log("Error when connecting to mongodb: " + error)
 });
 
-let initdb = function(){
+let createdb = function(){
     let objects = reqDir('./../seeds');
     let data = _.toArray(objects);
     return Promise.each(data, function(resource){
@@ -32,7 +32,7 @@ let initdb = function(){
     });
 }
 
-initdb().then(message => {
+createdb().then(message => {
     console.log(message);
     process.exit(0);
 });
