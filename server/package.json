@@ -18,6 +18,8 @@
   "homepage": "https://github.com/BogdanSabin/DP-TheTinyRoTrain#readme",
   "dependencies": {
     "bluebird": "^3.7.2",
-    "mongoose": "^5.9.10"
+    "lodash": "^4.17.15",
+    "mongoose": "^5.9.10",
+    "require-dir": "^1.2.0"
   }
 }
