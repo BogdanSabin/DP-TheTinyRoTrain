@@ -6,16 +6,14 @@
   "author": "DP team",
   "license": "ISC",
   "homepage": "https://github.com/BogdanSabin/DP-TheTinyRoTrain#readme",
-  
   "scripts": {
     "createdb": "node ./scripts/createdb"
   },
-
   "dependencies": {
     "bluebird": "^3.7.2",
+    "crypto": "^1.0.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.10",
     "require-dir": "^1.2.0"
   }
-
 }
