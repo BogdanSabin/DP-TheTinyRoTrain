@@ -5,6 +5,12 @@ module.exports = {
             algorithm: 'aes-256-cbc',
             key: 'lslj@{0RwFDAKqS3l0Q8q(ET4$5bgiwl',
             iv: 'XJ3LWoLw:1zD!}wf'
+        },
+        server:{
+            main_server: {
+                hostname: "localhost",
+                port: 11010
+            }
         }
     }
 }
