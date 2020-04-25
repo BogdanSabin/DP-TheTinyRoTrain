@@ -1,0 +1,144 @@
+
+<div class="wrapper d-flex align-items-stretch">
+	<nav id="sidebar">
+		<div class="custom-menu">-->
+			<!--<button type="button" id="sidebarCollapse" class="btn btn-primary"> </button>-->
+        </div>
+	  	<div class="img bg-wrap text-center py-4" style="background-image: url(../../assets/admin/images/bg_1.jpg);">
+	  		<div class="user-logo">
+	  			<div class="img" style="background-image: url(../../assets/admin/images/logo.jpg);"></div>
+	  			<h3>Admin Panel</h3>
+	  		</div>
+	  	</div>
+        <ul class="list-unstyled components mb-5">
+            <li class="active">
+                <a href="../home"><span class="fa fa-home mr-3"></span> Home</a>
+            </li>
+            <li>
+                <a (click)="tabToggle(1)">Add Station</a>
+            </li>
+            <li>
+                <a (click)="tabToggle(2)">Add Route</a>
+            </li>
+            <li>
+                <a (click)="tabToggle(3)">Add vagon</a>
+            </li>
+            <li>
+                <a (click)="tabToggle(4)">Add Train</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-sign-out mr-3"></span> Log Out</a>
+            </li>
+        </ul>
+    </nav>
+-->
+    <!-- Page Content  -->
+    <div *ngIf ="showTab == 0" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Welcome to Admin Page</h2>
+        <p>Bogdan Sefu Sefilor aka El Profesor</p>
+        <p>Mema asistentul pentru Franeksteinul lui Bogdan</p>
+        <p>Eu, care are fire albe din cauza lui Angular :P</p>
+        <p>Adina asistenta mea care face ca orice problema sa dispara</p>
+    </div>
+
+
+    <div *ngIf ="showTab == 1" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Add New Station</h2>
+        <input type="text" placeholder="Enter name">
+        <br><br>
+        <input type="text" placeholder="Enter waiting time" onfocus="(this.type='time')">
+        <br>
+        <div class="submitroute">
+            <input type="submit" placeholder="Create">
+        </div> 
+    </div>
+
+
+    <div *ngIf ="showTab == 2" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Add New Route</h2>
+        <form [formGroup]="routeForm">        
+            <div formArrayName="station">
+                <div *ngFor="let item of allStations.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                <label>
+                     <select name="sation" id="station">
+                        <option hidden [value]="">Select a Station</option>
+                        <option *ngFor="let station of stations" [value]="station.id">
+                            {{station.name}}
+                        </option>
+                    </select>
+                    <input type="number" placeholder="Enter arrival time" formControlName="point" />
+                </label>
+                <button type="button" (click)="addStations()">+</button>
+                <button type="button" (click)="deleteStations(pointIndex)">-</button>
+                </div>
+                
+            </div>
+        </form>
+        <br><br>
+        <input type="text" placeholder="Enter leaving date" onfocus="(this.type='date')">
+        <br><br>
+        <input type="text" placeholder="Enter leaving date" onfocus="(this.type='date')">
+        <br><br>
+        <input type="text" placeholder="Enter Name">
+        <br>
+        <div class="submitroute">
+            <input type="submit" placeholder="Create">
+        </div> 
+
+
+    </div>
+
+
+
+    <div *ngIf ="showTab == 3" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Add New Vagon</h2>
+        <input type="number" placeholder="Enter total places">
+        <br><br>
+        <input type="text" placeholder="Enter class">
+        <br><br>
+        <input type="text" placeholder="Enter Name">
+        <br><br>
+        <input type="number" placeholder="Enter Seat Price">
+        <br>
+        <div class="submitroute">
+            <input type="submit" placeholder="Create">
+        </div> 
+    </div>
+
+
+
+    <div *ngIf ="showTab == 4" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Add New Train</h2>
+        <form [formGroup]="routeForm">        
+            <div formArrayName="station">
+                <div *ngFor="let item of allStations.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                <label>
+                    <select name="vagon" id="vagon">
+                        <option hidden [value]="">Select a Vagon</option>
+                        <option *ngFor="let vagon of vagons" [value]="vagon.id">
+                            {{vagon.name}}
+                        </option>
+                    </select>
+                </label>
+                <button type="button" (click)="addStations()">+</button>
+                <button type="button" (click)="deleteStations(pointIndex)">-</button>
+                </div>
+                <select name="route" id="route">
+                    <option hidden [value]="">Select a Route</option>
+                    <option *ngFor="let route of routes" [value]="route.id">
+                        {{route.name}}
+                    </option>
+                </select>
+                <input type="text" placeholder="Enter Train Name">
+                <br>
+                <div class="submitroute">
+                    <input type="submit" placeholder="Create">
+                </div> 
+
+                
+            </div>
+        </form>
+    </div>
+
+    
+</div>-->

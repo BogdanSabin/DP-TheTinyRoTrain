@@ -1,0 +1,18 @@
+button{
+    border: none;
+    color: black;
+    background-color: inherit;
+    font-size: large;
+    margin-right: 2em;
+}
+select{
+    margin-right: 5em;
+}
+input{
+    margin-right: 6em;
+}
+
+.submitroute{
+    margin-top: 5em;
+  text-align: center; 
+}
