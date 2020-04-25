@@ -1,9 +1,17 @@
+const config = require('./../config/config');
+const connection = require('../config/dbconnect').connect(config.local.mongodb);
 const express = require('express');
 const bodyParser = require('body-parser');
 const morganBody = require('morgan-body');
-
-const config = require('./../config/config');
 const routes = require('./../routes');
+
+connection.on('open', function(){
+    console.log("Successfully connected to mongodb");
+});
+
+connection.on('error', function(error){
+    console.log("Error when connecting to mongodb: " + error)
+});
 
 const app = express();
 
@@ -15,6 +23,7 @@ const hostname = config.local.server.main_server.hostname;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+//logger for requests
 morganBody(app,
   {
     logReqUserAgent:false,

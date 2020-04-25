@@ -4,7 +4,7 @@ const getConnection = require('./getConnection').getConnection;
 var distanceSchema = mongoose.Schema({
     station1: mongoose.Types.ObjectId,
     station2: mongoose.Types.ObjectId,
-    distance: number
+    distance: Number
 },{
     collection: 'distances'
 });

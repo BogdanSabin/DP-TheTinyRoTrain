@@ -10,5 +10,11 @@ connection.on('error', function(error){
     console.log("Error when connecting: " + error)
 });
 
-const user = new UserModel({ firstName: 'master', lastName: 'sda', email: 'ads', phone: 'dsa' });
+console.log(UserModel);
+
+const user = new UserModel({ firstName: 'asd', lastName: 'sda', email: 'ads', phone: 'dsa' });
 user.save().then(()=>{console.log("Saved!"); process.exit(0)});
+
+UserModel.findOne({firstName:'asd'}, function(error, data){
+    console.log(data);
+})

@@ -1,11 +1,29 @@
 const router = require('express').Router();
+const middlewate = require('./../../middleware').user;
 
 router.post('/register', (req, res) =>{
-    res.status(200).send("User register ");
+    middlewate.registerUser(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);  
+        else
+            res.status(200).send(serverRes);
+     });
 });
 
 router.post('/login', (req, res) =>{
-    res.status(200).send("User log in");
+    middlewate.loginUser(req, function(error, serverRes){
+        if(error == 'Not Found')
+            res.status(404).send({});
+        else
+            if(error == 'Forbidden')
+                res.status(403).send({});
+             else
+                if(error)
+                    res.status(500).send();
+        
+                else
+                    res.status(200).send(serverRes);
+    });
 });
 
 router.post('/update/:id', (req, res) =>{

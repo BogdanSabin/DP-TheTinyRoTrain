@@ -3,10 +3,10 @@ const getConnection = require('./getConnection').getConnection;
 
 var wagonSchema = mongoose.Schema({
     name: String,
-    freeSeatsNo: number,
-    totalSeatsNo: number,
+    freeSeatsNo: Number,
+    totalSeatsNo: Number,
     class: String,
-    price: number,
+    price: Number,
     seats: [Boolean]
 },{
     collection: 'wagons'
