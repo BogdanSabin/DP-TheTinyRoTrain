@@ -22,7 +22,7 @@ module.exports.connect = function(dbConfig, connectionName){
 }
 
 module.exports.getConnectionByName = function(connectionName){
-    if(connectionCache['connection'])
-        console.log("Model connection done!");
+    if(!connectionCache['connection'])
+        console.log("Model connection failed!");
     return connectionCache[connectionName] || connectionCache['connection'];
 }
