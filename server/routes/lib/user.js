@@ -27,25 +27,58 @@ router.post('/login', (req, res) =>{
 });
 
 router.post('/update/:id', (req, res) =>{
-    res.status(200).send("User update");
+    middlewate.updateUser(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);  
+        else
+            res.status(200).send(serverRes);
+     });
 });
 
 router.post('/delete/:id', (req, res) =>{
-    res.status(200).send("User  in");
+    middlewate.deleteUser(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);  
+        else
+            res.status(200).send(serverRes);
+     });
 });
 
-router.post('/make/admin/:id', (req, res) =>{
-    res.status(200).send("User log in");
+router.post('/change/:role/:id', (req, res) =>{
+    middlewate.changerole(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);  
+        else
+            res.status(200).send(serverRes);
+     });
 });
 
-router.post('/getone/:id', (req, res) =>{
-    res.status(200).send("user get one by id ");
+router.get('/getone/:id', (req, res) =>{
+    middlewate.getUser(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);  
+        else
+            res.status(200).send(serverRes);
+     });
 });
 
 router.get('/all', (req, res) =>{
-    res.status(200).send("users get all ");
+    middlewate.getAllUsers(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);  
+        else
+            res.status(200).send(serverRes);
+     });
 });
 
+router.get('/roles', (req, res) =>{
+    middlewate.getUserRoles(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);  
+        else
+            res.status(200).send(serverRes);
+     });
+});
 
 
 module.exports = router;

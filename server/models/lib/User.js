@@ -14,6 +14,10 @@ var userSchema = mongoose.Schema({
     collection: 'users'
 });
 
+userSchema.statics.getRoles = function(next) {
+    return next(null, roles);
+  };
+
 mongoose.model('User', userSchema);
 
 module.exports = function(){
