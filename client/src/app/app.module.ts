@@ -19,7 +19,11 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { AdminComponent } from './admin/admin.component';
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder } from '@angular/forms';
+import { FormcontrolValidationMsgDirective } from './formcontrol-validation-msg.directive';
+import { FormsubmitValidationMsgDirective } from './formsubmit-validation-msg.directive';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +35,10 @@ import { FormBuilder } from '@angular/forms'
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    AdminComponent
+    AdminComponent,
+    FormcontrolValidationMsgDirective,
+    FormsubmitValidationMsgDirective,
+    UserprofileComponent
   ],
   imports: [
     BrowserModule,

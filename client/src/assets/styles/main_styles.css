@@ -162,7 +162,8 @@ section
 }
 .clearfix
 {
-	zoom: 1;
+	transform: scale(1);
+	transform-origin: 0 0;
 }
 .float_left
 {

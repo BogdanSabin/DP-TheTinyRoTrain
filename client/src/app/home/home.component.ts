@@ -14,11 +14,11 @@ export class HomeComponent implements OnInit {
   public maxDate: Date = new Date ("05/27/2017 11:00 AM");
   public dateValue: Date = new Date ("05/16/2017 5:00 AM");
 
-  userDisplayName = {}
+  userDisplayName = '';
   userStorePassword = {}
   constructor(public _authService: AuthService, private _login: LoginComponent) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.userDisplayName = sessionStorage.getItem('loggedUser');
   }
 

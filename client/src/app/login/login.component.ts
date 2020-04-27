@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css', ]
 })
 export class LoginComponent implements OnInit {
 
@@ -57,5 +57,20 @@ export class LoginComponent implements OnInit {
       },
       err => console.log(err)
     ) 
+    sessionStorage.setItem('loggedUser', this.loginUserData.email)
+    console.log(this.loginUserData.email);
+    
+  }
+
+  passwordType: string = 'password';
+  passswordShown: boolean = false;
+  visibility(){
+    if(this.passswordShown){
+      this.passswordShown = false;
+      this.passwordType = 'password';
+    }else{
+      this.passswordShown = true;
+      this.passwordType = 'text'
+    }
   }
 }
