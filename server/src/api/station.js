@@ -11,7 +11,7 @@ module.exports = {
     },
     
     getStation: function(data, next){
-        return lib.getOne(data, next);
+        return lib.getStation(data, next);
     },
 
     getAllStations: function(data, next){

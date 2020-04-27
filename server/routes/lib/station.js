@@ -9,19 +9,39 @@ router.post('/create', (req, res) =>{
 });
 
 router.post('/update/:id', (req, res) =>{
-    res.status(200).send("station update");
+   middleware.updateStation(req, function(error, serverRes){
+       if(error)
+            res.status(500).send(error);
+       else
+            res.status(200).send(serverRes);
+   });
 });
 
 router.get('/getStation/:id', (req, res) =>{
-    res.status(200).send("station get by id " + req.params.id);
+    middleware.getStation(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);
+        else    
+            res.status(200).send(serverRes);
+    });
 });
 
 router.get('/all', (req, res) =>{
-    res.status(200).send("get stations all");
+    middleware.getAllStations(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);
+        else
+            res.status(200).send(serverRes);
+    });
 });
 
 router.delete('/delete/:id', (req, res) =>{
-    res.status(200).send("station delete by id " + req.params.id);
+    middleware.deleteStation(req, function(error, serverRes){
+        if(error)
+            res.status(500).send(error);
+        else    
+            res.status(200).send(serverRes);
+    });
 });
 
 module.exports = router;
