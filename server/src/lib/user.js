@@ -34,7 +34,6 @@ module.exports.loginUser = function(data, next){
 
 module.exports.registerUser = function(data, next){
     let filter = {email: data.email};
-
     //check if already exists an user with this cresentials
     return Model.findOne(filter, function(error, user){
         if(error)

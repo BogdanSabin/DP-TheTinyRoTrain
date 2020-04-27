@@ -7,6 +7,9 @@ module.exports = {
     },
 
     registerUser: function(data, next){
+        if(!data.role || data.role != 'user')
+            data.role = 'user'
+            
         return lib.registerUser(data, next);
     },
 

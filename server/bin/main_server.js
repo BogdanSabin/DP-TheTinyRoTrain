@@ -35,6 +35,7 @@ morganBody(app,
 // add routes for  app
 app.use('/api/authorization/user', routes.user);
 app.use('/api/resource/station', routes.station);
+app.use('/api/resource/route', routes.route);
 
 
 // make the server listen to requests
