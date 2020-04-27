@@ -1,4 +1,5 @@
 const Model =require('./../../models').Station();
+const serverErrors = require('./error');
 
 module.exports.createStation = function(data, next){
     let filter ={name: data.name};
@@ -6,7 +7,7 @@ module.exports.createStation = function(data, next){
     //check if already exists a station with this name
     return Model.findOne(filter, function(error,station){
         if(error)
-            return next(error);
+            return next(serverErrors.InteralError(error));
         if(!station){
             let newStation =new Model(data);
             newStation.save().then(()=>{
@@ -14,6 +15,6 @@ module.exports.createStation = function(data, next){
             });
         }
         else
-            return next('Collision');
+            return next(serverErrors.Collision());
     });
 }
