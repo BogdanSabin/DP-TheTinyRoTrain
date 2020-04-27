@@ -1,6 +1,7 @@
 const config = require('./../config/config');
 const connection = require('../config/dbconnect').connect(config.local.mongodb);
 const express = require('express');
+var cors = require('cors')
 const bodyParser = require('body-parser');
 const morganBody = require('morgan-body');
 const routes = require('./../routes');
@@ -20,6 +21,7 @@ const port = config.local.server.main_server.port;
 const hostname = config.local.server.main_server.hostname;
 
 //app configuration
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
