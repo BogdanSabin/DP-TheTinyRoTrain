@@ -5,5 +5,6 @@ module.exports = {
     Wagon: require('./lib/Wagon'),
     Train: require('./lib/Train'),
     Link: require('./lib/Train'),
-    Distance: require('./lib/Distance')
+    Distance: require('./lib/Distance'),
+    Ticket: require('./lib/Ticket')
 }
