@@ -7,7 +7,8 @@
   "license": "ISC",
   "homepage": "https://github.com/BogdanSabin/DP-TheTinyRoTrain#readme",
   "scripts": {
-    "createdb": "node ./scripts/createdb"
+    "createdb": "node ./scripts/createdb",
+    "startMain": "node ./bin/main_server"
   },
   "dependencies": {
     "bluebird": "^3.7.2",

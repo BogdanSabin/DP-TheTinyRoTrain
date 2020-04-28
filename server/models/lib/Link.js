@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const getConnection = require('./getConnection').getConnection;
 
 var linkSchema = mongoose.Schema({
-    route1: mongoose.Types.ObjectId,
-    route2: mongoose.Types.ObjectId,
-    station: mongoose.Types.ObjectId
+    route1: { type: mongoose.Types.ObjectId, ref: 'Route' },
+    route2: { type: mongoose.Types.ObjectId, ref: 'Route' },
+    station: { type: mongoose.Types.ObjectId, ref: 'Station' }
 },{
     collection: 'links'
 });

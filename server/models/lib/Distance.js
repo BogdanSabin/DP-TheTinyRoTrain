@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const getConnection = require('./getConnection').getConnection;
 
 var distanceSchema = mongoose.Schema({
-    station1: mongoose.Types.ObjectId,
-    station2: mongoose.Types.ObjectId,
+    station1: { type: mongoose.Types.ObjectId, ref: 'Station' },
+    station2: { type: mongoose.Types.ObjectId, ref: 'Station'},
     distance: Number
 },{
     collection: 'distances'

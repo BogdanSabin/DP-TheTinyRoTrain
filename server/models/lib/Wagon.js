@@ -7,7 +7,8 @@ var wagonSchema = mongoose.Schema({
     totalSeatsNo: Number,
     class: String,
     price: Number,
-    seats: [Boolean]
+    seats: [Boolean],
+    isAttached: Boolean
 },{
     collection: 'wagons'
 });

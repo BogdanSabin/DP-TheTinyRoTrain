@@ -10,7 +10,7 @@ var routeSchema = mongoose.Schema({
     collection: 'routes'
 });
 
-mongoose.model('Route',routeSchema);
+mongoose.model('Route', routeSchema);
 
 module.exports =function(){
     return getConnection('connection').model('Route');

@@ -3,8 +3,8 @@ const getConnection = require('./getConnection').getConnection;
 
 var trainSchema = mongoose.Schema({
     name: String,
-    route: mongoose.Types.ObjectId,
-    wagons: [mongoose.Types.ObjectId]
+    route: { type: mongoose.Types.ObjectId, ref: 'Route' },
+    wagons: [{ type : mongoose.Types.ObjectId, ref: 'Wagon' }]
 },{
     collection: 'trains'
 });
