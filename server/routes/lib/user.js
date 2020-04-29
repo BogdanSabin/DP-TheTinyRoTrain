@@ -2,18 +2,6 @@ const router = require('express').Router();
 const middlewate = require('./../../middleware').user;
 const helper = require('./helper');
 
-router.post('/register', (req, res) =>{
-    middlewate.registerUser(req, function(error, serverRes){
-        helper.respond(res, error, serverRes);
-     });
-});
-
-router.post('/login', (req, res) =>{
-    middlewate.loginUser(req, function(error, serverRes){
-        helper.respond(res, error, serverRes);
-    });
-});
-
 router.post('/update/:id', (req, res) =>{
     middlewate.updateUser(req, function(error, serverRes){
         helper.respond(res, error, serverRes);

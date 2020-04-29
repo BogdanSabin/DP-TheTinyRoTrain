@@ -18,7 +18,6 @@ module.exports.authorize = function(token, role, next){
           if(!payload)
               return next(serverError.UnauthorizedError('Payload missing'));
           
-          console.log("Playload: ", payload);
           let userid = payload.subject;
       
           ModelUser.findById(userid, function(error, user){

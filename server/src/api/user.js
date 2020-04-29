@@ -3,17 +3,6 @@ const helper = require('./../lib/helper');
 const authorize = require('./../authorizator/autz').authorize;
 
 module.exports = {
-
-    loginUser: function (data, next) {
-        return lib.loginUser(data, next);
-    },
-
-    registerUser: function (data, next) {
-        if (data.role != 'user')
-            data.role = 'user'
-        return lib.registerUser(data, next);
-    },
-
     updateUser: function (data, token, next) {
         return authorize(token, 'admin', function (error, ok) {
             if(error)
@@ -54,7 +43,7 @@ module.exports = {
     },
 
     getAllUsers: function (data, token, next) {
-        return authorize(token, 'master', function (error, ok) {
+        return authorize(token, 'admin', function (error, ok) {
             if(error)
                 return next(error);
             if(ok)

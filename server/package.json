@@ -20,6 +20,7 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.9.10",
     "morgan-body": "^2.4.8",
+    "nodemailer": "^6.4.6",
     "require-dir": "^1.2.0"
   }
 }

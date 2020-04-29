@@ -35,7 +35,8 @@ morganBody(app,
 
 
 // add routes for  app
-app.use('/api/authorization/user', routes.user);
+app.use('/api/authentication', routes.authentication);
+app.use('/api/resource/user', routes.user);
 app.use('/api/resource/station', routes.station);
 app.use('/api/resource/route', routes.route);
 app.use('/api/resource/wagon', routes.wagon);

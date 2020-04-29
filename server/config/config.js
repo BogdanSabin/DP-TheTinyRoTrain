@@ -12,9 +12,18 @@ module.exports = {
                 port: 11010
             }
         },
+        client: {
+            portocol: "http",
+            hostname: "localhost",
+            port: 4200
+        },
         secret: {
             auth: "HYtvL7Of8KcZbdomUAeVRJmd61WUycOrJYSkmZzN",
             email: "aBVEUj9bJveUiPokFUIumGBFsTnuqAXwGRVGPgyn"
+        },
+        gmail: {
+            email: 'tinyrotrain@gmail.com',
+            password: 'Tinyrotrain123'
         }
     }
 }
