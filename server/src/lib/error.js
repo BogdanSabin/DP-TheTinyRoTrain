@@ -19,6 +19,7 @@ module.exports = {
             data: 'Collsion of fields in database'
         }
     },
+
     Unauthorized: function(){
         return {
             status: 401,
@@ -26,10 +27,24 @@ module.exports = {
         }
     },
 
+    UnauthorizedError: function(error){
+        return {
+            status: 401,
+            data: 'Unauthorized: ' + error 
+        }
+    },
+
     InteralError: function(error){
         return {
             status: 500,
             data: error
+        }
+    },
+
+    MissingArgument: function(error){
+        return {
+            status: 500,
+            data: 'Missing argument: ' + error
         }
     }
 }

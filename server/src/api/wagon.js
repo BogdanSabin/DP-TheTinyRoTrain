@@ -1,23 +1,50 @@
 const lib = require('./../lib/wagon');
+const helper = require('./../lib/helper');
+const authorize = require('./../authorizator/autz').authorize;
 
 module.exports = {
-    createWagon: function(data, next) {
-        return lib.createWagon(data, next);        
+    createWagon: function (data, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return lib.createWagon(data, next);
+        });
     },
 
-    updateWagon: function(data, next){
-        return lib.updateWagon(data, next);
+    updateWagon: function (data, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return lib.updateWagon(data, next);
+        });
     },
 
-    getWagonByid: function(routeid, next){
-        return lib.getWagonByid(routeid, next);
+    getWagonByid: function (routeid, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return lib.getWagonByid(routeid, next);
+        });
     },
 
-    getAllWagons: function(data, next){
-        return lib.getAllWagons(data, next);
+    getAllWagons: function (data, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return lib.getAllWagons(data, next);
+        });
     },
 
-    deleteWagonByid: function(routeid, next){
-        return lib.deleteWagonByid(routeid, next);
+    deleteWagonByid: function (routeid, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return lib.deleteWagonByid(routeid, next);
+        });
     }
 }

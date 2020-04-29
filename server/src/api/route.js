@@ -1,23 +1,71 @@
-const lib =require('./../lib/route');
+const lib = require('./../lib/route');
+const helper = require('./../lib/helper');
+const authorize = require('./../authorizator/autz').authorize;
 
 module.exports = {
-    createRoute: function(data, next) {
-        return lib.createRoute(data, next);        
+    createRoute: function (data, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return helper.createResource({
+                    data: data,
+                    Model: lib.routeModel,
+                    createFilter: lib.createFilter(data),
+                    responseFilter: lib.resposeFilter
+                }, next);
+        });
     },
 
-    updateRoute: function(data, next){
-        return lib.updateRoute(data, next);
+    updateRoute: function (data, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return helper.updateResource({
+                    data: data,
+                    Model: lib.routeModel,
+                    updateFilter: lib.updateFilter(data),
+                    updateData: lib.updateData
+                }, next);
+        });
     },
 
-    getRouteByid: function(routeid, next){
-        return lib.getRouteByid(routeid, next);
+    getRouteByid: function (routeid, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return helper.getResourceByid({
+                    id: routeid,
+                    Model: lib.routeModel,
+                    responseFilter: lib.resposeFilter
+                }, next);
+        });
     },
 
-    getAllRoutes: function(data, next){
-        return lib.getAllRoutes(data, next);
+    getAllRoutes: function (data, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return helper.getAllResources({
+                    Model: lib.routeModel,
+                    getAllFilter: lib.getAllFilter(data),
+                    responseFilter: lib.resposeFilter
+                }, next);
+        });
     },
 
-    deleteRouteByid: function(routeid, next){
-        return lib.deleteRouteByid(routeid, next);
+    deleteRouteByid: function (routeid, token, next) {
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+                return helper.deleteResourceByid({
+                    id: routeid,
+                    Model: lib.routeModel
+                }, next);
+        });
     }
 }

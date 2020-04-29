@@ -20,23 +20,23 @@ module.exports = {
             updateData: req.body,
             userid: req.params.id
         }
-        return api.updateUser(data, next);
+        return api.updateUser(data, req.headers.authorization, next);
 
     },
 
     deleteUser: function(req, next){
         let userid = req.params.id;
-        return api.deleteUser(userid, next);
+        return api.deleteUser(userid, req.headers.authorization, next);
     },
 
     getUser:function(req, next){
         let userid = req.params.id;
-        return api.getUser(userid, next);
+        return api.getUser(userid, req.headers.authorization, next);
     },
 
     getAllUsers: function(req, next){
         let data = req.body;
-        return api.getAllUsers(data, next);
+        return api.getAllUsers(data, req.headers.authorization, next);
     },
 
     changerole: function(req, next){
@@ -44,11 +44,11 @@ module.exports = {
             userid: req.params.id,
             role: req.params.role
         }
-        return api.makeAdmin(data, next);
+        return api.makeAdmin(data, req.headers.authorization, next);
     },
 
     getUserRoles: function(req, next){
-        return api.getUserRoles(next);
+        return api.getUserRoles(req.headers.authorization, next);
     }
 
 

@@ -20,7 +20,7 @@ router.post('/update/:id', (req, res) =>{
      });
 });
 
-router.post('/delete/:id', (req, res) =>{
+router.delete('/delete/:id', (req, res) =>{
     middlewate.deleteUser(req, function(error, serverRes){
         helper.respond(res, error, serverRes);
      });

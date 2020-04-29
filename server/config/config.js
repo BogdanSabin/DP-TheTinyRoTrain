@@ -6,11 +6,15 @@ module.exports = {
             key: 'lslj@{0RwFDAKqS3l0Q8q(ET4$5bgiwl',
             iv: 'XJ3LWoLw:1zD!}wf'
         },
-        server:{
+        server: {
             main_server: {
                 hostname: "localhost",
                 port: 11010
             }
+        },
+        secret: {
+            auth: "HYtvL7Of8KcZbdomUAeVRJmd61WUycOrJYSkmZzN",
+            email: "aBVEUj9bJveUiPokFUIumGBFsTnuqAXwGRVGPgyn"
         }
     }
 }

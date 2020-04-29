@@ -9,7 +9,8 @@ var userSchema = mongoose.Schema({
     email: String,
     phone: String,
     password: String,
-    role: {type: String, enum: roles, "default": roles[0]}
+    role: {type: String, enum: roles, "default": roles[0]},
+    emailConfirmation: {type: Boolean, "default": false}
 },{
     collection: 'users'
 });

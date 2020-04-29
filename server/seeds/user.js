@@ -11,6 +11,7 @@ users.push(_.extend({},{
     lastName: 'master',
     email: 'master@email.ro',
     role: 'master',
+    emailConfirmation: true,
     password: crypter.encrypt('password')
 }));
 
