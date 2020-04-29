@@ -4,23 +4,7 @@ const secretKeyEmail = require('./../../config/config').local.secret.email;
 const serverError = require('./../lib/error');
 const ModelUser = require('./../lib/user').userModel;
 
-function verifyToken(req, res, next) {
-    if(!req.headers.authorization) {
-      return res.status(401).send('Unauthorized request')
-    }
-    let token = req.headers.authorization.split(' ')[1]
-    if(token === 'null') {
-      return res.status(401).send('Unauthorized request')    
-    }
-    let payload = jwt.verify(token, 'secretKey')
-    if(!payload) {
-      return res.status(401).send('Unauthorized request')    
-    }
-    req.userId = payload.subject
-    next()
-  }
-
-  module.exports.authorize = function(token, role, next){
+module.exports.authorize = function(token, role, next){
     if(!token)
         return next(serverError.UnauthorizedError('Token missing'));
     
