@@ -6,7 +6,7 @@ const Model = require('./../models').User();
 var users = [];
 
 users.push(_.extend({},{
-    _id: mongoose.Types.ObjectId("101010101010101010101010"),
+    _id: mongoose.Types.ObjectId("5ebb8149bb1561111b811b97"),
     firstName: 'master',
     lastName: 'master',
     email: 'master@email.ro',

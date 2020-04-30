@@ -5,13 +5,13 @@ const Model = require('./../models').Station();
 var stations = [];
 
 stations.push(_.extend({},{
-    _id: mongoose.Types.ObjectId("100000000000000000000000"),
+    _id: mongoose.Types.ObjectId("5ebb8149bb1561111b899b97"),
     name: 'TimisoaraNord',
     timeToWait: 10
 }));
 
 stations.push(_.extend({},{
-    _id: mongoose.Types.ObjectId("100000000000000000000002"),
+    _id: mongoose.Types.ObjectId("5ebb8149bb1561111b888b97"),
     name: 'TimisoaraSud',
     timeToWait: 1
 }));
