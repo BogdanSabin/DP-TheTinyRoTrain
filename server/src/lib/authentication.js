@@ -27,7 +27,7 @@ module.exports.loginUser = function(data, next){
             };
             //create token
             let payload = {subject: user._id};
-            let token = jwt.sign(payload, secretKey);
+            let token = jwt.sign(payload, secretKey, { expiresIn: '10h' });
             
             response.token = token;
             

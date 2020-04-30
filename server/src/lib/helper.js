@@ -77,10 +77,11 @@ module.exports.updateResource = function(options, next){
             return next(serverError.InteralError(error));
         if(!data)
             return next(serverError.NodataFound());
-        
+        console.log(filter);
         Model.updateOne(filter, data, function(error, mongores){
             if(error)
                 return next(serverErrors.InteralError(error));
+            console.log(mongores);
             if(mongores.nModified == 0)
                 return next('No data modified');
             return next(null, 'Data updated');

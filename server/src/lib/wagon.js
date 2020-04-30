@@ -1,5 +1,6 @@
+const _ = require('lodash');
 const Model = require('./../../models').Wagon();
-const ModelTrein = require('./../../models').Train();
+const ModelTrain = require('./../../models').Train();
 
 module.exports.wagonModel = Model;
 
@@ -33,7 +34,7 @@ module.exports.responseWithTrain = function(data, next){
 }
 
 module.exports.updateFilter = function(data){
-    return {_id: data.routeid };
+    return {_id: data.wagonid };
 }
 
 module.exports.updateData = function(data, next){

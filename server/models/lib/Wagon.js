@@ -33,6 +33,16 @@ wagonSchema.statics.isDefaultType = function(type) {
     return types.includes(type)
 };
 
+wagonSchema.pre("save",function(next) {
+    if (this.totalSeatsNo == 0)
+        console.log("Invalid seats number");
+    else {
+        this.freeSeatsNo = this.totalSeatsNo;
+        for(let i = 0; i < this.totalSeatsNo; i++)
+          this.seats.push(true);
+    }
+    next();
+});
 
 mongoose.model('Wagon',wagonSchema);
 

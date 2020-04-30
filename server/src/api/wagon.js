@@ -8,7 +8,12 @@ module.exports = {
             if(error)
                 return next(error);
             if(ok)
-                return lib.createWagon(data, next);
+               return helper.createResource({
+                    data: data,
+                    Model: lib.wagonModel,
+                    createFilter: lib.createFilter(data),
+                    responseFilter: lib.responseFilter
+                }, next);
         });
     },
 
@@ -17,16 +22,26 @@ module.exports = {
             if(error)
                 return next(error);
             if(ok)
-                return lib.updateWagon(data, next);
+                return helper.updateResource({
+                    data: data,
+                    Model: lib.wagonModel,
+                    updateFilter: lib.updateFilter(data),
+                    updateData: lib.updateData
+
+                }, next);
         });
     },
 
-    getWagonByid: function (routeid, token, next) {
+    getWagonByid: function (wagonid, token, next) {
         return authorize(token, 'admin', function (error, ok) {
             if(error)
                 return next(error);
             if(ok)
-                return lib.getWagonByid(routeid, next);
+                return helper.getResourceByid({
+                    id: wagonid,
+                    Model: lib.wagonModel,
+                    responseFilter: lib.responseFilter
+                },next);
         });
     },
 
@@ -35,16 +50,23 @@ module.exports = {
             if(error)
                 return next(error);
             if(ok)
-                return lib.getAllWagons(data, next);
+                return helper.getAllResources({
+                    Model: lib.wagonModel,
+                    getAllFilter: lib.getAllFilter(data),
+                    responseFilter: lib.responseFilter
+                }, next);
         });
     },
 
-    deleteWagonByid: function (routeid, token, next) {
+    deleteWagonByid: function (wagonid, token, next) {
         return authorize(token, 'admin', function (error, ok) {
             if(error)
                 return next(error);
             if(ok)
-                return lib.deleteWagonByid(routeid, next);
+                return helper.deleteResourceByid({
+                    id: wagonid,
+                    Model: lib.wagonModel
+                }, next);
         });
     }
 }
