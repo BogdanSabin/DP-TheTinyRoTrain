@@ -14,18 +14,19 @@ var transporter = nodemailer.createTransport({
 });
 
 
-var url = "http://" + hostname + ':' + port + "/api/authentication/confirmation"
+var templateUrl = "http://" + hostname + ':' + port + "/api/authentication/confirmation/"
 
-var mailOptions = {
-    from: config.local.gmail.email,
-    to: '',
-    subject: 'Account confirmation - TinyRoTRain',
-    text: "Congratulations! Your account has been created.\n Pleas click the following link to confirm your email: "
-};
 
-module.exports.sendConfirmationEmail = function (token, next) {
-    url = url + token;
-    mailOptions.text = mailOptions.text + url
+module.exports.sendConfirmationEmail = function (token, emailToSend, next) {
+    let url = templateUrl + token;
+    
+    let mailOptions = {
+        from: config.local.gmail.email,
+        to: emailToSend,
+        subject: 'Account confirmation - TinyRoTRain',
+        text: "Congratulations! Your account has been created.\n Please click the following link to confirm your email: " + `${url}`
+    };
+
     transporter.sendMail(mailOptions, function (error, info) {
         if (error)
             return next(serverError.InteralError(error));

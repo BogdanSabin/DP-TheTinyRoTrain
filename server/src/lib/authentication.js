@@ -52,9 +52,15 @@ module.exports.registerUser = function(data, next){
                 let tokenEemail = jwt.sign({subject: newUser._id}, secretKeyEmail, 
                     { expiresIn: '10h' });
                     
-                notifier.sendConfirmationEmail(tokenEemail, function(error, info){
-                    if(error)
-                        return next(error);
+                notifier.sendConfirmationEmail(tokenEemail, newUser.email, function(error, info){
+                    if(error){
+                        //delete the new created user due to email error
+                        Model.deleteOne({_id: options.id}, function(err, data){
+                            if(err)
+                                return next(serverErrors.InteralError(err));
+                            return next(error);
+                        });
+                    }
                     return next(null,  _.pick(newUser, ['_id', 'role', 'firstName', 'lastName', 'email']));
                 });
             });
@@ -73,24 +79,25 @@ module.exports.emailConfirmation = function(token, next){
         let payload = jwt.verify(token, secretKeyEmail);
           
         if(!payload)
-            return next(serverError.UnauthorizedError('Payload missing'));
+            return next(serverErrors.UnauthorizedError('Payload missing'));
         
         let userid = payload.subject;
 
         Model.updateOne({_id: userid}, {emailConfirmation: true}, function(error, mongores){
             if(error)
                 return next(serverErrors.InteralError(error));
+
             if(mongores.nModified == 0)
-                return next(serverError.NodataFound());
-            
+                return next(serverErrors.NodataFound());
+        
             let res = { 
-                redirect: "http://" + config.hostname + ":" + config.port + "/login" };
-            
+                redirect: "http://" + config.hostname + ":" + config.port + "/login"  };
             return next(null, res);
-        }) 
+        }); 
 
 
     }catch(error){
+        console.log("Catch error: ", error);
         return next(serverErrors.InteralError(error));
     }
     

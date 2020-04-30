@@ -14,8 +14,8 @@ router.post('/login', (req, res) =>{
     });
 });
 
-router.post('/confirmation/:token', (req, res) =>{
-    middlewate.loginUser(req, function(error, serverRes){
+router.get('/confirmation/:token', (req, res) =>{
+    middlewate.emailConfirmation(req, function(error, serverRes){
         helper.redirect(res, error, serverRes);
     });
 });
