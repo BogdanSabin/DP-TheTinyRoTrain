@@ -26,11 +26,14 @@ module.exports.responseFilter = function(data, next){
 
 module.exports.responseWithTrain = function(data, next){
     if(_.isArray(data)){
-
+        let response = [];
+        data.forEach(d =>{
+            response.push(addTrainToResponse(d));
+        });
+        return next(null, response);
     }
-    else {
-        
-    }
+    else
+        return next(null, addTrainToResponse(data));
 }
 
 module.exports.updateFilter = function(data){
@@ -45,44 +48,28 @@ module.exports.getAllFilter = function(data){
     return data || {}   
 }
 
-// module.exports.createWagon = function(data, next){
-//    let filter = {name: data.name, totalSeatsNo: data.totalSeatsNo, type: data.type}
-//    Model.findOne(filter, function(error, wagon){
-//        if(error)
-//         return next(serverError.InteralError(error));
-//        if(wagon)
-//         return next(serverError.Collision);
-//         data.seats = [];
-//         for(let i = 0; i < data.totalSeatsNo; i++)
-//             data.seats[i] = false;
-//        let newWagon = new Model(data);
-//        newWagon.save().then(() => {
-//         return next(null, _.pick(newWagon, 
-//             ['_id', 'name', 'totalSeatsNo', 'type', 'price'])) 
-//        })
-    
-//    })
-// }
+module.exports.setAttachedFlag = function(id, value){
+    return Model.updateData({_id: id}, {isAttached: value}).exec();
+}
 
-// module.exports.updateWagon = function(data, next){
-//     let filter = {_id: data.wagonid };
-//     let updateData = data.updateData;
-   
-//     Model.updateOne(filter, updateData, function(error, data){
-//         if(error)
-//             return next(serverErrors.InteralError(error));
-//         return next(null, data);
-//     });
-// }
-
-// module.exports.getWagonByid = function(routeid, next){
-   
-// }
-
-// module.exports.getAllWagons = function(data, next){
-    
-// }
-
-// module.exports.deleteWagonByid = function(routeid, next){
-    
-// }
+function addTrainToResponse(data){
+    if(data.isAttached){
+        ModelTrain.findOne({wagons: data._id}, function(error, train){
+            if(error)
+                return {
+                    error: error,
+                    wagonid: data._id
+                }
+            
+            data.attachededTo = {
+                _id: train._id,
+                name: train.name
+            };
+            return _.pick(data, 
+                ['_id', 'name', 'totalSeatsNo', 'type', 'price', 'attachededTo']); 
+        });
+    }
+    else
+        return _.pick(data, 
+            ['_id', 'name', 'totalSeatsNo', 'type', 'price']);
+}

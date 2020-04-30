@@ -40,7 +40,7 @@ module.exports = {
                 return helper.getResourceByid({
                     id: wagonid,
                     Model: lib.wagonModel,
-                    responseFilter: lib.responseFilter
+                    responseFilter: lib.responseWithTrain
                 },next);
         });
     },
@@ -53,7 +53,7 @@ module.exports = {
                 return helper.getAllResources({
                     Model: lib.wagonModel,
                     getAllFilter: lib.getAllFilter(data),
-                    responseFilter: lib.responseFilter
+                    responseFilter: lib.responseWithTrain
                 }, next);
         });
     },
