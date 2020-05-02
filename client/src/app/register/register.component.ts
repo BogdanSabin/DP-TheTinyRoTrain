@@ -11,10 +11,10 @@ import { ThrowStmt } from '@angular/compiler';
 export class RegisterComponent implements OnInit {
 
   public registerUserData = {
-    email: '',
-    firstname: '',
-    lastname: '',
-    password: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
    }
   constructor(private _auth: AuthService, private _router: Router) { }
 
@@ -27,12 +27,12 @@ export class RegisterComponent implements OnInit {
       res => {
         console.log(res)
         localStorage.setItem('token', res.token)
-        this._router.navigate(['/home'])
+        this._router.navigate(['/login'])
       },
       
       err => console.log(err)
     )
-    sessionStorage.setItem('loggedUser', this.registerUserData.lastname)
+    sessionStorage.setItem('loggedUser', this.registerUserData.lastName)
   }
 
   passwordType: string = 'password';

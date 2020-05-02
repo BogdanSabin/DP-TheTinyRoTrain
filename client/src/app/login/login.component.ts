@@ -10,13 +10,15 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginUserData = {
+    firstName: '',
+    lastName: '',
     email: '',
     password: ''
    }
 /*
    obiect = {
      statii: [{
-       name: ''
+       n310413 ''
 
      }],
      timp ajungere: ''
@@ -26,34 +28,20 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /*loginUser() {
-    this._auth.loginUser(this.loginUserData)
-      .subscribe(
-        res => {
-          localStorage.setItem('token', res.token)
-          this._router.navigate(['/home'])
-          /*
-          sessionStorage.setItem('loggedUser', this.loginUserData.email)
-          if(this.loginUserData.email == "admin" && this.loginUserData.password == "admin"){
-            this._router.navigate(['/admin'])
-          }
-          else{
-            this._router.navigate(['/home'])
-          }
-        },
-        err => console.log(err)
-      )
-      
-      console.log(this.loginUserData)
-  }*/
-
   loginUser () {
     this._auth.loginUser(this.loginUserData)
     .subscribe(
       
       res => {
         localStorage.setItem('token', res.token)
-        this._router.navigate(['/home'])
+        localStorage.setItem('role',res.role)
+        if(res.role === 'master'){
+          this._router.navigate(['/admin'])
+        }
+        else{
+          this._router.navigate(['/home'])
+        }
+        
       },
       err => console.log(err)
     ) 

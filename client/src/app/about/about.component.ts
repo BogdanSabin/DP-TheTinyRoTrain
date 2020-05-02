@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  userDisplayName = '';
+  userStorePassword = {}
+  constructor(public _authService: AuthService, private _login: LoginComponent) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.userDisplayName = sessionStorage.getItem('loggedUser');
   }
+
+  public getInfo (){
+    return this._login.loginUserData
+  }
+
 
 }
