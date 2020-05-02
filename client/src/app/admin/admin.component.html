@@ -77,7 +77,7 @@
                 <label>
                      <select [(ngModel)]="Routes.stations[0].name" [ngModelOptions]="{standalone: true}" name="sation" id="station">
                         <option hidden [value]="">Select a Station</option>
-                        <option *ngFor="let station of responseStations" [value]="station._id">
+                        <option *ngFor="let station of responseStations" [value]="station.name">
                             {{station.name}}
                         </option>
                     </select>

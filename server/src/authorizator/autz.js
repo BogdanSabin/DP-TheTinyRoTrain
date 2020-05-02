@@ -24,7 +24,7 @@ module.exports.authorize = function(token, role, next){
               if(error)
                   return next(serverError.InteralError(error));
               if(!user)
-                  return next(serverError.NodataFound());
+                  return next(serverError.UnauthorizedError(' No user found based on token'));
               if(user.role == role || user.role == 'master')
                   return next(null, true);
               else
