@@ -1,5 +1,4 @@
 const Model =require('./../../models').Station();
-const serverErrors = require('./error');
 const _ = require('lodash');
 
 module.exports.stationModel = Model;
@@ -31,6 +30,9 @@ module.exports.updateFilter = function(data){
 }
 
 module.exports.updateData = function(data, next){
+    console.log("bbbbbbbbbbbbbbbbbbbbbbbbbb");
+    console.log(data.updateData);
+    console.log("bbbbbbbbbbbbbbbbbbbbbbbbb");
     return next(null, data.updateData);
 }
 
