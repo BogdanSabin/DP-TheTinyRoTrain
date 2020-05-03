@@ -40,7 +40,7 @@ module.exports = {
                 return helper.getResourceByid({
                     id: stationId,
                     Model: lib.stationModel,
-                    responseFilter: lib.resposeFilter
+                    responseFilter: lib.responseFilter
                 }, next);
         });
     },
@@ -53,7 +53,7 @@ module.exports = {
                 return helper.getAllResources({
                     Model: lib.stationModel,
                     getAllFilter: lib.getAllFilter(data),
-                    responseFilter: lib.resposeFilter
+                    responseFilter: lib.responseFilter
                 }, next);
         });
     },
