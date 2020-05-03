@@ -40,6 +40,11 @@ app.use('/api/resource/user', routes.user);
 app.use('/api/resource/station', routes.station);
 app.use('/api/resource/route', routes.route);
 app.use('/api/resource/wagon', routes.wagon);
+<<<<<<< Updated upstream
+app.use('/api/resource/train', routes.wagon);
+=======
+app.use('/api/resource/train', routes.train);
+>>>>>>> Stashed changes
 
 
 // make the server listen to requests

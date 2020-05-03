@@ -4,4 +4,9 @@ module.exports = {
     station: require('./lib/station'),
     route: require('./lib/route'),
     wagon: require('./lib/wagon'),
+<<<<<<< Updated upstream
+    train: require('.lib/train')
+=======
+    train: require("./lib/train")
+>>>>>>> Stashed changes
 }

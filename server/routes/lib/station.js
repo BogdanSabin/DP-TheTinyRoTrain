@@ -10,37 +10,25 @@ router.post('/create', (req, res) =>{
 
 router.post('/update/:id', (req, res) =>{
    middleware.updateStation(req, function(error, serverRes){
-       if(error)
-            res.status(500).send(error);
-       else
-            res.status(200).send(serverRes);
+        helper.respond(res, error, serverRes);
    });
 });
 
 router.get('/getStation/:id', (req, res) =>{
     middleware.getStation(req, function(error, serverRes){
-        if(error)
-            res.status(500).send(error);
-        else    
-            res.status(200).send(serverRes);
+        helper.respond(res, error, serverRes);
     });
 });
 
 router.get('/all', (req, res) =>{
     middleware.getAllStations(req, function(error, serverRes){
-        if(error)
-            res.status(500).send(error);
-        else
-            res.status(200).send(serverRes);
+        helper.respond(res, error, serverRes);
     });
 });
 
 router.delete('/delete/:id', (req, res) =>{
     middleware.deleteStation(req, function(error, serverRes){
-        if(error)
-            res.status(500).send(error);
-        else    
-            res.status(200).send(serverRes);
+        helper.respond(res, error, serverRes);
     });
 });
 

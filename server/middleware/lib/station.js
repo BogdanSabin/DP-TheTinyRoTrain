@@ -25,7 +25,7 @@ module.exports ={
     },
 
     deleteStation: function(req, next){
-        let data = req.params.id;
-        return api.deleteStation(data, req.headers.authorization, next);
+        let stationId = req.params.id;
+        return api.deleteStation(stationId, req.headers.authorization, next);
     }
 }

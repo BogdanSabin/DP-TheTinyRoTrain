@@ -3,7 +3,7 @@ const helper = require('./../lib/helper');
 const authorize = require('./../authorizator/autz').authorize;
 
 module.exports = {
-    createRoute: function (data, token, next) {
+    createTrain: function (data, token, next) {
         return authorize(token, 'admin', function (error, ok) {
             if(error)
                 return next(error);
@@ -17,7 +17,7 @@ module.exports = {
         });
     },
 
-    updateRoute: function (data, token, next) {
+    updateTrain: function (data, token, next) {
         return authorize(token, 'admin', function (error, ok) {
             if(error)
                 return next(error);
@@ -31,7 +31,7 @@ module.exports = {
         });
     },
 
-    getRouteByid: function (routeid, token, next) {
+    getTrain: function (routeid, token, next) {
         return authorize(token, 'admin', function (error, ok) {
             if(error)
                 return next(error);
@@ -44,7 +44,7 @@ module.exports = {
         });
     },
 
-    getAllRoutes: function (data, token, next) {
+    getAllTrains: function (data, token, next) {
         return authorize(token, 'admin', function (error, ok) {
             if(error)
                 return next(error);
