@@ -1,4 +1,4 @@
-const lib = require('./../lib/train ');
+const lib = require('./../lib/train');
 const helper = require('./../lib/helper');
 const authorize = require('./../authorizator/autz').authorize;
 
