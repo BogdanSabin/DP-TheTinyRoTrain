@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormArray,FormGroup } from '@angular/forms';
 import { Data, Stations } from '../data';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -79,65 +78,87 @@ export class AdminComponent implements OnInit {
     timeToWait: ''
   }
 
+ //Object for temporary storing FORM DATA
+ routeForm = this.fb.group({
+  name: ['', Validators.required],
+  departureDate: [''],
+  arrivalDate: [''],
 
-  stations2=[
-    {id: 1, name:"Arad"},
-    {id: 2, name:"Timisoara"},
-    {id: 3, name:"Bucuresti"},
-    {id: 4, name:"Severin"},
-    {id: 5, name:"Deva"},
-  ]
+  stationsName: this.fb.array([
+    this.fb.control('')
+  ])
+});
 
-  routes=[
-    {id: 1, name:"ruta1"},
-    {id: 2, name:"ruta2"},
-    {id: 3, name:"ruta3"},
-    {id: 4, name:"ruta4"},
-    {id: 5, name:"ruta5"},
-  ]
 
-  vagons=[
-    {id: 1, name:"vagon1"},
-    {id: 2, name:"vagon2"},
-    {id: 3, name:"vagon3"},
-    {id: 4, name:"vagon4"},
-    {id: 5, name:"vagon5"},
-  ]
+
+
+counter: number;
+onSubmit(){
+  var firstname = this.routeForm.controls['name'].value;
+  var departureDate = this.routeForm.get('departureDate').value;
+  var arrivalDate = this.routeForm.get('arrivalDate').value;
+
+  console.log("first name is : " +firstname);
+  console.log("second name is: "+departureDate);
+  console.log("arrivalDate is: "+arrivalDate);
+
+  //console.log("Mobile 1 is :" + this.routeForm.get(['mobiles','0']).value);
+  this.counter=0;
+  for(let station of this.stationsName.controls)
+  {
+    console.log("Stations is :"+this.routeForm.get(['stationsName',this.counter]).value);
+    this.counter = this.counter+1;
+  }
+
+  
+}
+
+get stationsName(){
+  return this.routeForm.get('stationsName') as FormArray; 
+}
+
+
+addNewStationName(){
+  this.stationsName.push(this.fb.control(''));
+  
+}
+
+
+
+
+
  
+
 
 
 
  
   constructor(private fb: FormBuilder, private _router: Router, private _auth: AuthService,private http: HttpClient) { }
 
-  routeForm: FormGroup;
-  index2: number;
-  specialEvent=[]
-
   ngOnInit() {
-    /* Initiate the form structure */
-    this.routeForm = this.fb.group({
-      title: [],
-      station: this.fb.array([this.fb.group({point:''})])
-    })
-
     if(this._auth.loggedAdmin()){
       return true;
     }
     this._router.navigate(['/home'])
+
+    /*this.routeForm = this.fb.group({
+      name: '',
+      departureDate: '',
+      arrivalDate: '',
+      stations: this.fb.array([this.createStat() ])
+
+    });*/
   }
 
-  get allStations(){
-    return this.routeForm.get('station') as FormArray;
-  }
 
-  addStations() {
-    this.allStations.push(this.fb.group({point:''}));
-  }
 
-  deleteStations(index) {
+
+
+
+
+  /*deleteStations(index) {
     this.allStations.removeAt(index);
-  }
+  }*/
   
   showTab = 0;
   tabToggle(index){
@@ -262,6 +283,7 @@ export class AdminComponent implements OnInit {
   }
 
   current_id: ''
+
   getOneStation(id){
     return this.http.get<any>(this._getOneStationURL+id, this.httpOptions)
       .subscribe(

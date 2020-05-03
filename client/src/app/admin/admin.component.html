@@ -69,39 +69,61 @@
     </div>
 
 
-    <div *ngIf ="showTab == 2" id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Add New Route</h2>
-        <form [formGroup]="routeForm">        
-            <div formArrayName="station">
-                <div *ngFor="let item of allStations.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                <label>
-                     <select [(ngModel)]="Routes.stations[0].name" [ngModelOptions]="{standalone: true}" name="sation" id="station">
-                        <option hidden [value]="">Select a Station</option>
-                        <option *ngFor="let station of responseStations" [value]="station.name">
-                            {{station.name}}
-                        </option>
-                    </select>
-                    <input type="number" [(ngModel)]="Routes.stations[0].arrival" placeholder="Enter arrival time" formControlName="point" />
-                </label>
-                <button type="button" (click)="addStations()">+</button>
-                <button type="button" (click)="deleteStations(pointIndex)">-</button>
-                </div>
-                
-            </div>
-        </form>
-        <br><br>
-        <input type="text" [(ngModel)]="Routes.departureDate" placeholder="Enter leaving date" onfocus="(this.type='date')">
-        <br><br>
-        <input type="text"  [(ngModel)]="Routes.arrivalDate" placeholder="Enter leaving date" onfocus="(this.type='date')">
-        <br><br>
-        <input type="text" [(ngModel)]="Routes.name" placeholder="Enter Name">
-        <br>
-        <div class="submitroute">
-            <input type="submit" (click)="createRoute()" placeholder="Create">
-        </div> 
 
+
+
+
+
+
+
+
+    <div *ngIf ="showTab == 2" id="content" class="p-4 p-md-5 pt-5">
+        <form [formGroup]="routeForm" (ngSubmit) = "onSubmit()">
+            <label>
+              Name:
+              <input type="text" formControlName="name">
+            </label>
+            <label>
+              DepartureDate:
+              <input type="text" formControlName="departureDate">
+            </label>
+            <label>
+               Arrival Date:
+                <input type="text" formControlName="arrivalDate">
+            </label>
+          
+            <div formArrayName="stationsName">
+              <button (click)="addNewStationName()">Add new Mobile Nr</button>
+          
+              <div *ngFor="let station of stationsName.controls; let i=index">
+                <label>Station1 {{i+1}}</label>
+                <select [formControlName]="i">
+                    <option [ngValue]="null">Select Station</option>
+                    <option *ngFor="let station of responseStations">{{station.name}}</option>
+                </select>
+              </div>
+            </div>
+          
+            <button type="submit" [disabled]="!routeForm.valid">Submit</button>
+          </form>
 
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -122,7 +144,7 @@
 
 
 
-    <div *ngIf ="showTab == 4" id="content" class="p-4 p-md-5 pt-5">
+    <!--<div *ngIf ="showTab == 4" id="content" class="p-4 p-md-5 pt-5">
         <h2 class="mb-4">Add New Train</h2>
         <form [formGroup]="routeForm">        
             <div formArrayName="station">
@@ -154,7 +176,7 @@
             </div>
         </form>
     </div>
-
+ --->
     <!--------------------------------VIEWS----------------------------->
     <!------------------------------------------------------------------>
     <div *ngIf ="showTab == 5" id="content" class="p-4 p-md-5 pt-5">
@@ -279,35 +301,7 @@
     </div>
 
     <div *ngIf ="showTab == 10" id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Update Route</h2>
-        <form [formGroup]="routeForm">        
-            <div formArrayName="station">
-                <div *ngFor="let item of allStations.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                <label>
-                     <select [(ngModel)]="Routes.stations[0].name" [ngModelOptions]="{standalone: true}" name="sation" id="station">
-                        <option hidden [value]="">{{Routes.stations[0].name}}</option>
-                        <option *ngFor="let station of responseStations" [value]="station._id">
-                            {{station.name}}
-                        </option>
-                    </select>
-                    <input type="number" [(ngModel)]="Routes.stations[0].arrival" placeholder="Enter arrival time" formControlName="point" />
-                </label>
-                <button type="button" (click)="addStations()">+</button>
-                <button type="button" (click)="deleteStations(pointIndex)">-</button>
-                </div>
-                
-            </div>
-        </form>
-        <br><br>
-        <input type="text" [(ngModel)]="Routes.departureDate " placeholder="Enter leaving date" onfocus="(this.type='date')">
-        <br><br>
-        <input type="text"  [(ngModel)]="Routes.arrivalDate" placeholder="Enter leaving date" onfocus="(this.type='date')">
-        <br><br>
-        <input type="text" [(ngModel)]="Routes.name" placeholder="Enter Name">
-        <br>
-        <div class="submitroute">
-            <input type="submit" (click)="updateRoute(current_id)" placeholder="Update Route">
-        </div>
+
     </div>
 
     
