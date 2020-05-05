@@ -25,7 +25,7 @@ module.exports.authorize = function(token, role, next){
                   return next(serverError.InteralError(error));
               if(!user)
                   return next(serverError.UnauthorizedError(' No user found based on token'));
-              if(user.role == role || user.role == 'master')
+              if(checkRole(user.role, role))
                   return next(null, true);
               else
                   return next(serverError.UnauthorizedError('role ' + user.role + ' need role ' + role));  
@@ -35,3 +35,16 @@ module.exports.authorize = function(token, role, next){
       return next(serverError.InteralError(error))
     }
   }
+
+function checkRole(userRole, autzRole){
+    //only admin and master
+    if(userRole == autzRole || userRole == 'master')
+        return true;
+
+    //all registred users
+    if(userRole == autzRole || userRole == 'admin')
+        return true;
+
+    return false;
+
+}

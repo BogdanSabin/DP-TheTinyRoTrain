@@ -38,4 +38,10 @@ router.get('/types/all', (req, res) =>{
     });
 });
 
+router.get('/seats/:id', (req, res) =>{
+    middleware.getAllSeats(req, function(error, serverRes){
+        helper.respond(res, error, serverRes);
+    });
+});
+
 module.exports = router;

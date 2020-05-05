@@ -77,5 +77,15 @@ module.exports = {
             if(ok)
                return lib.getAllTypes(next);
         });
+    },
+
+    getAllSeats: function(wagonid, token, next){
+        return authorize(token, 'user', function(error, ok){
+            if(error)
+                return next(error);
+            if(ok)
+                return lib.getAllSeats(wagonid, next);
+                    
+            });
     }
 }

@@ -31,5 +31,10 @@ module.exports = {
 
     getAllTypes: function(req, next){
         return api.getAllTypes(req.headers.authorization, next);
+    },
+
+    getAllSeats: function(req, next){
+        let wagonid = req.params.id;
+        return api.getAllSeats(wagonid, req.headers.authorization, next);
     }
 }

@@ -34,12 +34,14 @@ wagonSchema.statics.isDefaultType = function(type) {
 };
 
 wagonSchema.pre("save",function(next) {
-    if (this.totalSeatsNo == 0)
-        console.log("Invalid seats number");
+    if (this.totalSeatsNo <= 0)
+        console.log("Invalid seats number " + this.totalSeatsNo);
     else {
-        this.freeSeatsNo = this.totalSeatsNo;
-        for(let i = 0; i < this.totalSeatsNo; i++)
-          this.seats.push(true);
+        if(!this.seats.length === this.totalSeatsNo){
+            this.freeSeatsNo = this.totalSeatsNo;
+            for(let i = 0; i < this.totalSeatsNo; i++)
+                 this.seats.push(true);
+        }
     }
     next();
 });

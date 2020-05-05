@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const Model = require('./../../models').Wagon();
 const ModelTrain = require('./../../models').Train();
+const serverErrors = require('./error');
 
 module.exports.wagonModel = Model;
 
@@ -57,6 +58,53 @@ module.exports.getAllTypes = function(next){
         if(error)
             return next(serverErrors.InteralError(error));
         return next(null, data);
+    });
+}
+
+module.exports.getAllSeats = function(wagonid, next){
+    let response = {
+        freeSeats: [],
+        occupiedSeats: []
+    };
+    Model.findOne({_id: wagonid}, function(error, wagon){
+        if(error)
+            return next(serverErrors.InteralError(error));
+        
+        if(!wagon || !wagon.seats )
+            return next(serverErrors.NodataFound());
+        
+        let name = wagon.name;
+        wagon.seats.forEach((s, i) =>{
+            if(s)
+                response.freeSeats.push(name + '_S' + (i +1));
+            else
+                response.occupiedSeats.push(name + '_S' + (i +1));
+        });
+        return next(null, response);
+    });
+
+}
+
+module.exports.seatReservation = function(seatsReserved, wagonid, next){
+    //seats = ["wagonName_S1", "wagonName_S2", "wagonName_S3"]
+    //subtract 1 because of the array representation seats[0] is acctualy seat1 
+    let positions  = seatsReserved.map(s => {return parseInt(s.split('_')[1].substring(1),10) - 1 });
+    Model.findOne({_id: wagonid}, function(error, wagon){
+        if(error)
+            return next(serverErrors.InteralError(error));
+    
+        if(!wagon || !wagon.seats )
+            return next(serverErrors.NodataFound());
+
+        positions.forEach(p =>{
+            wagon.seats[p] = false;
+        });
+        wagon.freeSeatsNo = wagon.freeSeatsNo - positions.length;
+        wagon.markModified('seats');
+    
+        wagon.save().then(()=>{
+            return next(null, positions);
+        })
     });
 }
 
