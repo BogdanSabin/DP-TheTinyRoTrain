@@ -30,9 +30,6 @@ module.exports.updateFilter = function(data){
 }
 
 module.exports.updateData = function(data, next){
-    console.log("bbbbbbbbbbbbbbbbbbbbbbbbbb");
-    console.log(data.updateData);
-    console.log("bbbbbbbbbbbbbbbbbbbbbbbbb");
     return next(null, data.updateData);
 }
 

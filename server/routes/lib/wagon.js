@@ -32,4 +32,10 @@ router.delete('/delete/:id', (req, res) =>{
     });
 });
 
+router.get('/types/all', (req, res) =>{
+    middleware.getAllTypes(req, function(error, serverRes){
+        helper.respond(res, error, serverRes);
+    });
+});
+
 module.exports = router;

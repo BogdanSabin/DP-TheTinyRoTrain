@@ -68,5 +68,14 @@ module.exports = {
                     Model: lib.wagonModel
                 }, next);
         });
+    },
+
+    getAllTypes: function(token, next){
+        return authorize(token, 'admin', function (error, ok) {
+            if(error)
+                return next(error);
+            if(ok)
+               return lib.getAllTypes(next);
+        });
     }
 }

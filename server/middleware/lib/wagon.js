@@ -27,5 +27,9 @@ module.exports = {
     deleteWagonByid: function(req, next){
         let wagonid = req.params.id;
         return api.deleteWagonByid(wagonid, req.headers.authorization, next);
+    },
+
+    getAllTypes: function(req, next){
+        return api.getAllTypes(req.headers.authorization, next);
     }
 }

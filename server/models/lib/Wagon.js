@@ -15,7 +15,7 @@ var wagonSchema = mongoose.Schema({
     collection: 'wagons'
 });
 
-wagonSchema.statics.gettypes = function(next) {
+wagonSchema.statics.getTypes = function(next) {
     return next(null, types);
 };
 

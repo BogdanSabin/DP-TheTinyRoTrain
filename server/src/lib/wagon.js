@@ -52,6 +52,14 @@ module.exports.setAttachedFlag = function(id, value){
     return Model.updateData({_id: id}, {isAttached: value}).exec();
 }
 
+module.exports.getAllTypes = function(next){
+    Model.getTypes(function(error, data){
+        if(error)
+            return next(serverErrors.InteralError(error));
+        return next(null, data);
+    });
+}
+
 function addTrainToResponse(data){
     if(data.isAttached){
         ModelTrain.findOne({wagons: data._id}, function(error, train){
