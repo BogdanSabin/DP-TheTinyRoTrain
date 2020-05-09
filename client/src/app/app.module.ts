@@ -23,6 +23,9 @@ import { FormBuilder } from '@angular/forms';
 import { FormcontrolValidationMsgDirective } from './formcontrol-validation-msg.directive';
 import { FormsubmitValidationMsgDirective } from './formsubmit-validation-msg.directive';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 
 @NgModule({
@@ -39,6 +42,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     FormcontrolValidationMsgDirective,
     FormsubmitValidationMsgDirective,
     UserprofileComponent
+
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,11 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    DateTimePickerModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center'
+    })
   ],
   providers: [AuthService, AuthGuard, EventService, LoginComponent, AdminComponent, {
     provide: HTTP_INTERCEPTORS,

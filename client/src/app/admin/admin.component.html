@@ -1,33 +1,32 @@
 <body>
     
 
-<div class="wrapper d-flex align-items-stretch">
-	<nav id="sidebar">
-		<div class="custom-menu">
-			<!--<button type="button" id="sidebarCollapse" class="btn btn-primary"> </button>-->
+<div id="sidebar">
+    <div (click)="toggleSidebar()" class="toggle-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul>
+      <li><a href="../home">Home</a></li>
+      <li (click)="toggleSidenav('demo1')">Create
+        <div id="demo1" class="w3-container w3-hide">
+            <li>
+                <a (click)="callAddALL(1)">Create Station</a>
+            </li>
+            <li>
+                <a (click)="callAddALL(2)">Create Route</a>
+            </li>
+            <li>
+                <a (click)="callAddALL(3)">Create Wagon</a>
+            </li>
+            <li>
+                <a (click)="callAddALL(4)">Create Train</a>
+            </li>
         </div>
-	  	<div class="img bg-wrap text-center py-4" style="background-image: url(../../assets/admin/images/bg_1.jpg);">
-	  		<div class="user-logo">
-	  			<div class="img" style="background-image: url(../../assets/admin/images/logo.jpg);"></div>
-	  			<h3>Admin Panel</h3>
-	  		</div>
-	  	</div>
-        <ul class="list-unstyled components mb-5">
-            <li class="active">
-                <a href="../home"><span class="fa fa-home mr-3"></span> Home</a>
-            </li>
-            <li>
-                <a (click)="callAddALL(1)">Add Station</a>
-            </li>
-            <li>
-                <a (click)="callAddALL(2)">Add Route</a>
-            </li>
-            <li>
-                <a (click)="callAddALL(3)">Add vagon</a>
-            </li>
-            <li>
-                <a (click)="callAddALL(4)">Add Train</a>
-            </li>
+      </li>
+      <li (click)="toggleSidenav('demo2')">View
+        <div id="demo2" class="w3-container w3-hide">
             <li>
                 <a (click)="callALL(1)">View Stations</a>
             </li>
@@ -41,269 +40,512 @@
                 <a (click)="callALL(4)">View Trains</a>
             </li>
             <li>
-                <a href="#"><span class="fa fa-sign-out mr-3"></span> Log Out</a>
+                <a (click)="callALL(5)">View Users</a>
             </li>
-        </ul>
-    </nav>
+            <li>
+                <a (click)="callALL(6)">View Roles</a>
+            </li>
+        </div>
+      </li>
+    </ul> 
+</div>
 
-
+<div class="MAIN">
     <!-- Page Content  -->
     <div *ngIf ="showTab == 0" id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Welcome to Admin Page</h2>
+        <h3 class="text-center"><b>Welcome to Admin Page</b></h3>
         <p>Bogdan Sefu Sefilor aka El Profesor</p>
         <p>Mema asistentul pentru Franeksteinul lui Bogdan</p>
         <p>Eu, care are fire albe din cauza lui Angular :P</p>
         <p>Adina asistenta mea care face ca orice problema sa dispara</p>
     </div>
 
-
+    <!----------------------CREATE STATION---------------------->
+    <!---------------------------------------------------------->
     <div *ngIf ="showTab == 1" id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Add New Station</h2>
-        <input type="text" [(ngModel)]="stations.name" name="name" placeholder="Enter name">
-        <br><br>
-        <input type="text" [(ngModel)]="stations.timeToWait" name="name" placeholder="Enter waiting time">
-        <br>
-        <div class="submitroute">
-            <input type="submit"  (click)="createStation()" placeholder="Create">
-        </div> 
-    </div>
-
-
-
-
-
-
-
-
-
-
-    <div *ngIf ="showTab == 2" id="content" class="p-4 p-md-5 pt-5">
-        <form [formGroup]="routeForm" (ngSubmit) = "onSubmit()">
-            <label>
-              Name:
-              <input type="text" formControlName="name">
-            </label>
-            <label>
-              DepartureDate:
-              <input type="text" formControlName="departureDate">
-            </label>
-            <label>
-               Arrival Date:
-                <input type="text" formControlName="arrivalDate">
-            </label>
-          
-            <div formArrayName="stationsName">
-              <button (click)="addNewStationName()">Add new Mobile Nr</button>
-          
-              <div *ngFor="let station of stationsName.controls; let i=index">
-                <label>Station1 {{i+1}}</label>
-                <select [formControlName]="i">
-                    <option [ngValue]="null">Select Station</option>
-                    <option *ngFor="let station of responseStations">{{station.name}}</option>
-                </select>
-              </div>
+        <div class="box">
+            <label class="text-center">Add Station</label>
+            <div class="input-container">
+                <input  type="text" [(ngModel)]="stations.name" name="name" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Station Name</label>
             </div>
-          
-            <button type="submit" [disabled]="!routeForm.valid">Submit</button>
-          </form>
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div *ngIf ="showTab == 3" id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Add New Vagon</h2>
-        <input type="number" [(ngModel)]="Wagons.totalSeatsNo" placeholder="Enter total places">
-        <br><br>
-        <input type="text" [(ngModel)]="Wagons.type" placeholder="Enter class">
-        <br><br>
-        <input type="text" [(ngModel)]="Wagons.name" placeholder="Enter Name">
-        <br><br>
-        <input type="number" [(ngModel)]="Wagons.price" placeholder="Enter Seat Price">
-        <br>
-        <div class="submitroute">
-            <input type="submit" (click)="createWagon()" placeholder="Create">
-        </div> 
-    </div>
-
-
-
-    <!--<div *ngIf ="showTab == 4" id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Add New Train</h2>
-        <form [formGroup]="routeForm">        
-            <div formArrayName="station">
-                <div *ngFor="let item of allStations.controls; let pointIndex=index" [formGroupName]="pointIndex">
-                <label>
-                    <select name="vagon" id="vagon">
-                        <option hidden [value]="">Select a Vagon</option>
-                        <option *ngFor="let vagon of vagons" [value]="vagon.id">
-                            {{vagon.name}}
-                        </option>
-                    </select>
-                </label>
-                <button type="button" (click)="addStations()">+</button>
-                <button type="button" (click)="deleteStations(pointIndex)">-</button>
-                </div>
-                <select name="route" id="route">
-                    <option hidden [value]="">Select a Route</option>
-                    <option *ngFor="let route of routes" [value]="route.id">
-                        {{route.name}}
-                    </option>
-                </select>
-                <input type="text" placeholder="Enter Train Name">
-                <br>
-                <div class="submitroute">
-                    <input type="submit" placeholder="Create">
-                </div> 
-
-                
+            <br><br>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="stations.timeToWait" name="name" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Waiting Time</label>
             </div>
-        </form>
-    </div>
- --->
-    <!--------------------------------VIEWS----------------------------->
-    <!------------------------------------------------------------------>
-    <div *ngIf ="showTab == 5" id="content" class="p-4 p-md-5 pt-5">
-        <div class="limiter">
-            <div class="container-table100">
-                <h2 class="mb-4">View All Stations</h2>
-                <div class="wrap-table100">
-                    <div class="table100">
-                        <table>
-                            <thead>
-                                <tr class="table100-head">
-                                    <th class="column1">Name</th>
-                                    <th class="column2">Time to Wait</th>
-                                    <th class="column6">Update</th>
-                                    <th class="column6">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    <tr *ngFor="let station of responseStations">
-                                        <td class="column1">{{station.name}}</td>
-                                        <td class="column2">{{station.timeToWait}}</td>
-                                        <td class="column6"><input type="submit" (click)="callUpdates(1,station._id)" value="Update"></td>
-                                        <td class="column6"><input  type="submit" (click)="calldelete(1,station._id)" value="Delete"></td>
-                                    </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <br>
+            <div class="btnbox">
+                <a (click)="createStation()" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
             </div>
         </div>
-
-
     </div>
 
 
-    <div *ngIf ="showTab == 6" id="content" class="p-4 p-md-5 pt-5">
-        <div class="limiter">
+
+    <!----------------------CREATE ROUTE---------------------->
+    <!---------------------------------------------------------->
+    
+    <div *ngIf ="showTab == 2" id="content" class="p-4 p-md-5 pt-5 textblack">
+        <div class="box2">
+            <form [formGroup]="routeForm">
+                <span class="text-center">Add Route</span>
+                <div  formArrayName="stationsName">
+                    <button class="addbtn" (click)="addNewStationName()">+</button>
+                    <div *ngFor="let station of stationsName.controls; let i=index">
+                        <div [formGroup]="station" class="form-row">
+                            <select class="select-input" formControlName="name" >
+                                <option value="">Select station</option>
+                                <option *ngFor="let i of responseStations">{{i.name}}</option>
+                            </select>
+                                <ejs-datetimepicker placeholder="Enter arrival Time"id='datetimepicker' formControlName="arrival" format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>        
+                                <button class="removebtn" (click)="removeNewStationName(i)">-</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+                <div class="input-container">
+                    <input [(ngModel)]="Routes.name" type="text" required>
+                    <label>Route Name</label>
+                </div>
+            <div class="white-text">
+                <ejs-datetimepicker  id='datetimepicker' placeholder='Select Departure Date-Time ' [(ngModel)]= 'Routes.departureDate' format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>
+                <br><br>
+                <ejs-datetimepicker  id='datetimepicker' placeholder='Select Arrival Date-time' [(ngModel)]= 'Routes.arrivalDate' format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>
+            </div>
+            <br><br>
+            <div class="btnbox">
+                <a (click)="createRoute()" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+            </div>
+            </div>
+    </div>
+
+
+    <!-----------------------CREATE WAGON----------------------->
+    <!---------------------------------------------------------->
+
+    <div *ngIf ="showTab == 3" id="content" class="p-4 p-md-5 pt-5">
+        <div class="box">
+                <span class="text-center">Add Wagon</span>
+                <div class="input-container">
+                    <input type="text" [(ngModel)]="Wagons.name" required>
+                    <label>Wagon Name</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" [(ngModel)]="Wagons.totalSeatsNo" required>
+                    <label>Total Places</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" [(ngModel)]="Wagons.type" required>
+                    <label>Class</label>
+                </div>
+
+                <div class="input-container">
+                    <input type="text" [(ngModel)]="Wagons.price" required>
+                    <label>Seat Price</label>
+                </div>
+                <div class="btnbox">
+                    <a  (click)="createWagon()" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+                </div>
+        </div>
+    </div>
+
+    <!-----------------------CREATE TRAIN----------------------->
+    <!---------------------------------------------------------->
+    <div *ngIf ="showTab == 4" id="content" class="p-4 p-md-5 pt-5 textblack">
+        <div class="box2">
+            <form [formGroup]="trainForm">
+                <span class="text-center">Add Train</span>
+                <div  formArrayName="wagonsName">
+                    <button class="addbtn" (click)="addNewWagonName()">+</button>
+                    <div *ngFor="let wagon of wagonsName.controls; let i=index">
+                        <div [formGroup]="wagon" class="form-row">
+                            <select class="select-input2" formControlName="name" >
+                                <option value="">Select wagon</option>
+                                <option *ngFor="let i of responseWagons">{{i.name}}</option>
+                            </select>        
+                                <button class="removebtn" (click)="removeNewWagonName(i)">-</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+                <div class="input-container">
+                    <input [(ngModel)]="Wagons.name" type="text" required>
+                    <label>Wagon Name</label>
+                </div>
+                <select class="select-input3" [(ngModel)]="Trains.route" >
+                    <option value="">Select Route</option>
+                    <option *ngFor="let i of responseRoutes">{{i.name}}</option>
+                </select>   
+
+            <br><br>
+            <div class="btnbox">
+                <a (click)="createTrain()" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+            </div>
+            </div>
+    </div>
+    
+
+    <!--============================VIEWS=============================-->
+    <!--==============================================================-->
+
+
+
+    <!--============================VIEW ALL STATIONS============================-->
+    <!----------------------------------------------------------------------------->
+
+    <div *ngIf ="showTab == 5" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="text-center">View All Stations</h2>
             <div class="container-table100">
-                <h2 class="mb-4">View All Routes</h2>
-                <div class="wrap-table100">
-                    <div class="table100">
+                <div class="container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Time to Wait</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let station of responseStations">
+                                    <td>{{station.name}}</td>
+                                    <td>{{station.timeToWait}}</td>
+                                    <td><input  class="updatebtn" type="submit" (click)="callUpdates(1,station._id)" value="Update"></td>
+                                    <td><input class="deletebtn" type="submit" (click)="deleteStation(station._id)" value="Delete"></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+
+
+    <!--=============================VIEW ALL ROUTES=============================-->
+    <!----------------------------------------------------------------------------->
+    
+    <div *ngIf ="showTab == 6" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="text-center">View All Routes</h2>
+            <div class="container-table100">                
+                    <div class="container">
                         <table>
                             <thead>
-                                <tr class="table100-head">
-                                    <th class="column1">Name</th>
-                                    <th class="column2">Departure Date</th>
-                                    <th class="column3">Arrival Date</th>
-                                    <th class="column4">Station Name</th>
-                                    <th class="column5">Station Arrival</th>
-                                    <th class="column6">Update</th>
-                                    <th class="column6">Delete</th>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Departure Date</th>
+                                    <th>Arrival Date</th>
+                                    <th>Station Name</th>
+                                    <th>Station Arrival</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                     <tr *ngFor="let route of responseRoutes">
-                                        <td class="column1">{{route.name}}</td>
-                                        <td class="column2">{{route.departureDate | date:"dd.MM.y"}}</td>
-                                        <td class="column3">{{route.arrivalDate | date:"dd.MM.y"}}</td>
-                                        <td class="column4">{{route.stations[0].name}}</td>
-                                        <td class="column5">{{route.stations[0].arrival}}</td>
-                                        <td class="column6"><input (click)="callUpdates(2,route._id)" type="submit" value="Update"></td>
-                                        <td class="column6"><input  type="submit" value="Delete"></td>
+                                        <td>{{route.name}}</td>
+                                        <td>{{route.departureDate | date:"dd.MM.y"}}</td>
+                                        <td>{{route.arrivalDate | date:"dd.MM.y"}}</td>
+                                        <td>{{route.stations[0].name}}</td>
+                                        <td>{{route.stations[0].arrival | date:"dd.MM.y"}}</td>
+                                        <td><input class="updatebtn" (click)="callUpdates(2,route._id)" type="submit" value="Update"></td>
+                                        <td><input class="deletebtn" (click)="deleteRoute(route._id)" type="submit" value="Delete"></td>
                                     </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
             </div>
-        </div>
-
     </div>
 
 
+
+    <!--=============================VIEW ALL WAGONS=============================-->
+    <!----------------------------------------------------------------------------->
+
     <div *ngIf ="showTab == 7" id="content" class="p-4 p-md-5 pt-5">
-        <div class="limiter">
+        <h2 class="text-center">View All Wagons</h2>
             <div class="container-table100">
-                <h2 class="mb-4">View All Wagons</h2>
-                <div class="wrap-table100">
-                    <div class="table100">
+                    <div class="container">
                         <table>
                             <thead>
-                                <tr class="table100-head">
-                                    <th class="column1">Name</th>
-                                    <th class="column2">Total Seats</th>
-                                    <th class="column3">Type</th>
-                                    <th class="column4">Price</th>
-                                    <th class="column6">Update</th>
-                                    <th class="column6">Delete</th>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Total Seats</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                     <tr *ngFor="let wagon of responseWagons">
-                                        <td class="column1">{{wagon.name}}</td>
-                                        <td class="column2">{{wagon.totalSeatsNo}}</td>
-                                        <td class="column1">{{wagon.type}}</td>
-                                        <td class="column1">{{wagon.price}}</td>
-                                        <td class="column6"><input type="submit" value="Update"></td>
-                                        <td class="column6"><input  type="submit" value="Delete"></td>
+                                        <td>{{wagon.name}}</td>
+                                        <td>{{wagon.totalSeatsNo}}</td>
+                                        <td>{{wagon.type}}</td>
+                                        <td>{{wagon.price}}</td>
+                                        <td><input class="updatebtn" (click)="callUpdates(3,wagon._id)" type="submit" value="Update"></td>
+                                        <td><input class="deletebtn" (click)="deleteWagon(wagon._id)" type="submit" value="Delete"></td>
                                     </tr>
                             </tbody>
                         </table>
                     </div>
+            </div>
+    </div>
+
+
+    <!--=============================VIEW ALL Trains=============================-->
+    <!----------------------------------------------------------------------------->
+
+
+    <div *ngIf ="showTab == 8" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="text-center">View All Trains</h2>
+            <div class="container-table100">
+                    <div class="container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Wagon Name</th>
+                                    <th>Route Name</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr *ngFor="let train of responseTrains">
+                                        <td>{{train.name}}</td>
+                                        <td>{{train.wagons[0].name}}</td>
+                                        <td>{{train.route}}</td>
+                                        <td><input class="updatebtn" (click)="callUpdates(4,train._id)" type="submit" value="Update"></td>
+                                        <td><input class="deletebtn"  type="submit" value="Delete"></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+    </div>
+
+
+
+    <!--============================UPDATES============================-->
+    <!--===============================================================-->
+
+    <!--=============================UPDATE STATION==============================-->
+    <!----------------------------------------------------------------------------->
+    <div *ngIf ="showTab == 9" id="content" class="p-4 p-md-5 pt-5">
+        <div class="box">
+            <label class="text-center">Update Station</label>
+            <div class="input-container">
+                <input  type="text" [(ngModel)]="stations.name" name="name" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Station Name</label>
+            </div>
+            <br><br>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="stations.timeToWait" name="name" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Waiting Time</label>
+            </div>
+            <br>
+            <div class="btnbox">
+                <a (click)="updateStation(current_id)" class="btn btn-white btn-animation-1"><strong>Update</strong></a>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <!--==============================UPDATE ROUTE===============================-->
+    <!--=========================================================================-->
+
+    <div *ngIf ="showTab == 10" id="content" class="p-4 p-md-5 pt-5">
+        <div class="box2">
+            <form [formGroup]="routeForm">
+                <span class="text-center">Update Route</span>
+                <div  formArrayName="stationsName">
+                    <button class="addbtn" (click)="addNewStationName()">+</button>
+                    <div *ngFor="let station of stationsName.controls; let i=index">
+                        <div [formGroup]="station" class="form-row">
+                            <select class="select-input" formControlName="name" >
+                                <option value="">Select station</option>
+                                <option *ngFor="let i of responseStations">{{i.name}}</option>
+                            </select>
+                                <ejs-datetimepicker placeholder="Enter arrival Time"id='datetimepicker' formControlName="arrival" format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>        
+                                <button class="removebtn" (click)="removeNewStationName(i)">-</button>
+                        </div>
+                    </div>
                 </div>
+            </form>
+                <div class="input-container">
+                    <input [(ngModel)]="Routes.name" type="text" required>
+                    <label>Route Name</label>
+                </div>
+            <div class="white-text">
+                <ejs-datetimepicker  id='datetimepicker' placeholder='Select Departure Date-Time ' [(ngModel)]= 'Routes.departureDate' format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>
+                <br><br>
+                <ejs-datetimepicker  id='datetimepicker' placeholder='Select Arrival Date-time' [(ngModel)]= 'Routes.arrivalDate' format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>
+            </div>
+            <br><br>
+            <div class="btnbox">
+                <a (click)="updateRoute(current_id)" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+            </div>
+            </div>
+    </div>
+
+
+    <!--==============================UPDATE WAGON===============================-->
+    <!--=========================================================================-->
+
+    <div *ngIf ="showTab == 11" id="content" class="p-4 p-md-5 pt-5">
+        <div class="box">
+            <span class="text-center">Update Wagon</span>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="Wagons.name" required>
+                <label>Wagon Name</label>
+            </div>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="Wagons.totalSeatsNo" required>
+                <label>Total Places</label>
+            </div>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="Wagons.type" required>
+                <label>Class</label>
+            </div>
+
+            <div class="input-container">
+                <input type="text" [(ngModel)]="Wagons.price" required>
+                <label>Seat Price</label>
+            </div>
+            <div class="btnbox">
+                <a  (click)="updateWagon(current_id)" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div *ngIf ="showTab == 12" id="content" class="p-4 p-md-5 pt-5 textblack">
+        <div class="box2">
+            <form [formGroup]="trainForm">
+                <span class="text-center">Update Train</span>
+                <div  formArrayName="wagonsName">
+                    <button class="addbtn" (click)="addNewWagonName()">+</button>
+                    <div *ngFor="let wagon of wagonsName.controls; let i=index">
+                        <div [formGroup]="wagon" class="form-row">
+                            <select class="select-input2" formControlName="name" >
+                                <option value="">Select wagon</option>
+                                <option *ngFor="let i of responseWagons">{{i.name}}</option>
+                            </select>        
+                                <button class="removebtn" (click)="removeNewWagonName(i)">-</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+                <div class="input-container">
+                    <input [(ngModel)]="Wagons.name" type="text" required>
+                    <label>Wagon Name</label>
+                </div>
+                <select class="select-input3" [(ngModel)]="Trains.route" >
+                    <option value="">Select Route</option>
+                    <option *ngFor="let i of responseRoutes">{{i.name}}</option>
+                </select>   
+
+            <br><br>
+            <div class="btnbox">
+                <a (click)="createTrain()" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+            </div>
+            </div>
+    </div>
+
+
+    <!--============================VIEW ALL USERS===============================-->
+    <!----------------------------------------------------------------------------->
+
+    <div *ngIf ="showTab == 100" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="text-center">View All Users</h2>
+            <div class="container-table100">
+                    <div class="container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr *ngFor="let user of responseUsers">
+                                        <td>{{user.firstName}}</td>
+                                        <td>{{user.lastName}}</td>
+                                        <td>{{user.email}}</td>
+                                        <td>{{user.role}}</td>
+                                        <td><input class="updatebtn" type="submit" (click)="callUpdates(5,user._id)" value="Update"></td>
+                                        <td><input class="deletebtn" type="submit" (click)="deleteUser(user._id)" value="Delete"></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+    </div>
+
+    <!--==============================UPDATE USER//ROLE===============================-->
+    <!--==============================================================================-->
+
+    <div *ngIf ="showTab == 101" id="content" class="p-4 p-md-5 pt-5">
+        <div class="box">
+            <span class="text-center">Update user</span>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="uUsers.firstName">
+                <label>First name</label>
+            </div>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="uUsers.lastName">
+                <label>Last name</label>
+            </div>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="Users.email">
+                <label>Email</label>
+            </div>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="Users.role">
+                <label>Role</label>
+            </div>
+            <div class="btnbox">
+                <a (click)="updateUser(current_id)" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+                <a (click)="changeRole(current_id)" class="btn btn-white btn-animation-1"><strong>Change Role</strong></a>
             </div>
         </div>
 
     </div>
 
-
-    <div *ngIf ="showTab == 8" id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">View Trains</h2>
- 
+    <!--==============================VIEW ALL ROLES===============================-->
+    <!--==============================================================================-->
+    <div *ngIf ="showTab == 102" id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="text-center">View All Roles</h2>
+            <div class="container-table100">
+                    <div class="container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Roles name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let i of roles">
+                                    <td>{{i}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
     </div>
-
-<!------------------------------UPDATES----------------------------->
-<!------------------------------------------------------------------>
-    <div *ngIf ="showTab == 9" id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">Update Station</h2>
-        <input type="text" [(ngModel)]="stations.name">
-        <input type="text" [(ngModel)]="stations.timeToWait">
-        <input type="submit" (click)="updateStation(current_id)" value="Update Station">
-    </div>
-
-    <div *ngIf ="showTab == 10" id="content" class="p-4 p-md-5 pt-5">
-
-    </div>
-
-    
 </div>
 </body>

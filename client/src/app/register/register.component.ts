@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { ThrowStmt } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -16,9 +16,19 @@ export class RegisterComponent implements OnInit {
     email: "",
     password: ""
    }
-  constructor(private _auth: AuthService, private _router: Router) { }
+  constructor(private _auth: AuthService, private _router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
+  }
+
+  showSuccess(){
+    this.toastr.success("Success registration !!");
+  }
+  showInfo(){
+    this.toastr.info("Please confirm your email in order to log in !");
+  }
+  showError(){
+    this.toastr.error("Please fill up all fields corectly");
   }
 
   registerUser() {
@@ -30,7 +40,15 @@ export class RegisterComponent implements OnInit {
         this._router.navigate(['/login'])
       },
       
-      err => console.log(err)
+      err => {console.log(err)
+        if(err.status == 200){
+          this.showSuccess();
+          this.showInfo();
+        }
+        else{
+          this.showError();
+        }
+      }
     )
     sessionStorage.setItem('loggedUser', this.registerUserData.lastName)
   }
