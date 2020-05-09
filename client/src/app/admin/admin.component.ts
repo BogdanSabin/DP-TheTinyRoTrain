@@ -167,13 +167,6 @@ constructor(private formBuilder: FormBuilder,private cd: ChangeDetectorRef, priv
   }
 
   ngOnInit() {
-
-    if(this._auth.loggedAdmin()){
-      return true;
-    }
-    this._router.navigate(['/home'])
-
-
     this.routeForm = this.formBuilder.group({
       stationsName: new FormArray([])
   });
@@ -187,6 +180,11 @@ constructor(private formBuilder: FormBuilder,private cd: ChangeDetectorRef, priv
     this.trainForm.valueChanges.subscribe(data=>{
       this.Trains.wagons=data.wagonsName;
     })
+
+    if(this._auth.loggedAdmin()){
+      return true;
+    }
+    this._router.navigate(['/home'])
 
   }
 
