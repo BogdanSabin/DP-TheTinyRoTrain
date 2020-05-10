@@ -159,6 +159,15 @@ export class AdminComponent implements OnInit {
 
 constructor(private formBuilder: FormBuilder,private cd: ChangeDetectorRef, private toastr: ToastrService, private _router: Router, private _auth: AuthService,private http: HttpClient) { }
 
+//options for google atucomplete
+options = {
+  componentRestrictions: { country: 'RO' }
+}
+public handleAddressChange(address: any) {
+  //get name from input
+  this.stations.name = address.name;
+}
+
   showSuccess(){
     this.toastr.success("Your submision has been made !");
   }

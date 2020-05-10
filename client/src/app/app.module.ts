@@ -26,7 +26,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
-
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 @NgModule({
   declarations: [
@@ -54,7 +54,8 @@ import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
     DateTimePickerModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-center'
-    })
+    }),
+    GooglePlaceModule
   ],
   providers: [AuthService, AuthGuard, EventService, LoginComponent, AdminComponent, {
     provide: HTTP_INTERCEPTORS,
