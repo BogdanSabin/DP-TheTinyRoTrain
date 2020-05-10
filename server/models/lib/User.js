@@ -19,6 +19,10 @@ userSchema.statics.getRoles = function(next) {
     return next(null, roles);
   };
 
+userSchema.virtual('fullname').get(function() {
+    return this.firstName + ' ' + this.lastName;
+});
+
 mongoose.model('User', userSchema);
 
 module.exports = function(){

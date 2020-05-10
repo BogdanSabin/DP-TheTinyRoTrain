@@ -23,7 +23,9 @@ module.exports.loginUser = function(data, next){
         //check if passwords match
         if(password === crypter.decrypt(user.password)){
             let response = {
-                role: user.role
+                role: user.role,
+                _id: user._id,
+                name: user.fullname
             };
             //create token
             let payload = {subject: user._id};
