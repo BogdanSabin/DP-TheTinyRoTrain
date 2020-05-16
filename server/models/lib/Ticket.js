@@ -5,7 +5,7 @@ var ticketSchema = mongoose.Schema({
     train: { type: mongoose.Types.ObjectId, ref: 'Train' },
     wagon: { type : mongoose.Types.ObjectId, ref: 'Wagon' },
     class: String,
-    seat: String,
+    seats: [String],
     departureDate: Date,
     arrivalDate: Date,
     price: Number,

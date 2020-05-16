@@ -1,4 +1,5 @@
 const lib = require('./../lib/booking');
+const helper = require('./../lib/helper');
 const authorize = require('./../authorizator/autz').authorize;
 
 module.exports = {
@@ -12,16 +13,26 @@ module.exports = {
             if(error)
                 return next(error);
             if(ok)
-                return lib;
+            return helper.createResource({
+                data: data,
+                Model: lib.TicketModel,
+                createFilter: lib.createFilter(data.solution),
+                transformData: lib.transormData,
+                responseFilter: lib.resposeFilter
+            }, next);
         });
     },
 
-    getTicketById: function(data, token, next){
+    getTicketById: function(ticketid, token, next){
         return authorize(token, 'user', function (error, ok) {
             if(error)
                 return next(error);
             if(ok)
-                return lib;
+            return helper.getResourceByid({
+                id: ticketid,
+                Model: lib.TicketModel,
+                responseFilter: lib.resposeFilter
+            },next);
         });
     },
     
@@ -30,7 +41,11 @@ module.exports = {
             if(error)
                 return next(error);
             if(ok)
-                return lib;
+            return helper.getAllResources({
+                Model: lib.wagonModel,
+                getAllFilter: lib.getAllFilter(data.userid),
+                responseFilter: lib.resposeFilter
+            }, next);
         });
     }
 }
