@@ -64,6 +64,7 @@ export class AdminComponent implements OnInit {
 
   private _changeRoleURL = "http://localhost:11010/api/resource/user/change/";
   private _getRolesURL = "http://localhost:11010/api/resource/user/roles";
+  private _getClassesURL = "http://localhost:11010/api/resource/wagon/types/all";
   
   stations = {
     name: '',
@@ -104,7 +105,7 @@ export class AdminComponent implements OnInit {
     wagons: [{
       name: ''
     }],
-    route: '' 
+    route: ''
   }
 
   responseStations: [{
@@ -151,6 +152,7 @@ export class AdminComponent implements OnInit {
     lastName: '',
     email: ''
   }]
+  userDisplayName = sessionStorage.getItem('loggedUser');
 
 
 
@@ -194,6 +196,7 @@ public handleAddressChange(address: any) {
       return true;
     }
     this._router.navigate(['/home'])
+
 
   }
 
@@ -290,8 +293,9 @@ public handleAddressChange(address: any) {
       this.tabToggle(2);
       this.getAllStations();
     }
-    if (id == 3){
+    else if (id == 3){
       this.tabToggle(3);
+      this.getClasses();
     }
     else if (id == 4){
       this.tabToggle(4);
@@ -348,6 +352,7 @@ public handleAddressChange(address: any) {
     else if(id == 5){
       this.tabToggle(101);
       this.getOneUser(_id);
+      this.getRoles();
     }
   }
 
@@ -413,12 +418,23 @@ public handleAddressChange(address: any) {
       }
     )
   }
-
+  train={
+    name: '',
+    route: '',
+    wagon: []
+  }
   createTrain(){
-    return this.http.post(this._createTrainURL, this.Trains, this.httpOptions)
+    console.log(this.Trains)
+    this.train.wagon = this.Trains.wagons.map((m)=>{
+      return m.name;
+    })
+    this.train.name=this.Trains.name;
+    this.train.route=this.Trains.route;
+    
+    return this.http.post(this._createTrainURL, this.train, this.httpOptions)
       .subscribe(
         res=> {
-          console.log(this.Trains.name)
+          console.log(this.train)
           this.showSuccess()
           this.refresh()
         },
@@ -478,6 +494,15 @@ public handleAddressChange(address: any) {
         console.log(this.roles)},
         res => { console.log(res)}
       )
+  }
+  classes = []
+  getClasses(){
+    return this.http.get<any>(this._getClassesURL, this.httpOptions)
+    .subscribe(
+      data => {this.classes = data
+      console.log(this.classes)},
+      res => { console.log(res)}
+    )
   }
 
  

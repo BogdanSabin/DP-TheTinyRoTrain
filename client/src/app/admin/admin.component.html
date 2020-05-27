@@ -42,9 +42,6 @@
             <li>
                 <a (click)="callALL(5)">View Users</a>
             </li>
-            <li>
-                <a (click)="callALL(6)">View Roles</a>
-            </li>
         </div>
       </li>
     </ul> 
@@ -53,7 +50,7 @@
 <div class="MAIN">
     <!-- Page Content  -->
     <div *ngIf ="showTab == 0" id="content" class="p-4 p-md-5 pt-5">
-        <h3 class="text-center"><b>Welcome to Admin Page</b></h3>
+        <h3 class="text-center"><b>Welcome {{userDisplayName}}</b></h3>
         <p>Bogdan Sefu Sefilor aka El Profesor</p>
         <p>Mema asistentul pentru Franeksteinul lui Bogdan</p>
         <p>Eu, care are fire albe din cauza lui Angular :P</p>
@@ -102,7 +99,7 @@
                                 <option value="">Select station</option>
                                 <option *ngFor="let i of responseStations">{{i.name}}</option>
                             </select>
-                                <ejs-datetimepicker placeholder="Enter arrival Time"id='datetimepicker' formControlName="arrival" format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>        
+                                <igx-time-picker class="time-picker" formControlName="arrival" ></igx-time-picker>          
                                 <button class="removebtn" (click)="removeNewStationName(i)">-</button>
                         </div>
                     </div>
@@ -140,14 +137,13 @@
                     <label>Total Places</label>
                 </div>
                 <div class="input-container">
-                    <input type="text" [(ngModel)]="Wagons.type" required>
-                    <label>Class</label>
-                </div>
-
-                <div class="input-container">
                     <input type="text" [(ngModel)]="Wagons.price" required>
                     <label>Seat Price</label>
                 </div>
+                <select class="select-input3" [(ngModel)]="Wagons.type" >
+                    <option value="">Select Class</option>
+                    <option *ngFor="let i of classes">{{i}}</option>
+                </select>  
                 <div class="btnbox">
                     <a  (click)="createWagon()" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
                 </div>
@@ -164,9 +160,9 @@
                     <button class="addbtn" (click)="addNewWagonName()">+</button>
                     <div *ngFor="let wagon of wagonsName.controls; let i=index">
                         <div [formGroup]="wagon" class="form-row">
-                            <select class="select-input2" formControlName="name" >
+                            <select class="select-input2" formControlName="name">
                                 <option value="">Select wagon</option>
-                                <option *ngFor="let i of responseWagons">{{i.name}}</option>
+                                <option *ngFor="let i of responseWagons">{{i._id}}</option>
                             </select>        
                                 <button class="removebtn" (click)="removeNewWagonName(i)">-</button>
                         </div>
@@ -174,12 +170,12 @@
                 </div>
             </form>
                 <div class="input-container">
-                    <input [(ngModel)]="Wagons.name" type="text" required>
-                    <label>Wagon Name</label>
+                    <input [(ngModel)]="Trains.name" type="text" required>
+                    <label>Train Name</label>
                 </div>
                 <select class="select-input3" [(ngModel)]="Trains.route" >
                     <option value="">Select Route</option>
-                    <option *ngFor="let i of responseRoutes">{{i.name}}</option>
+                    <option *ngFor="let i of responseRoutes" [ngValue]="i._id">{{i.name}}</option>
                 </select>   
 
             <br><br>
@@ -453,7 +449,7 @@
                 <select class="select-input3" [(ngModel)]="Trains.route" >
                     <option value="">Select Route</option>
                     <option *ngFor="let i of responseRoutes">{{i.name}}</option>
-                </select>   
+                </select>    
 
             <br><br>
             <div class="btnbox">
@@ -502,6 +498,16 @@
     <div *ngIf ="showTab == 101" id="content" class="p-4 p-md-5 pt-5">
         <div class="box">
             <span class="text-center">Update user</span>
+            <small class="role-info">User Role</small>
+            <select class="select-input4" [(ngModel)]="Users.role" >
+                <option value="">{{Users.role}}</option>
+                <option *ngFor="let i of roles">{{i}}</option>
+            </select>
+            <br><br>
+            <div class="btnbox">
+                <a (click)="changeRole(current_id)" class="btn btn-white btn-animation-1"><strong>Change Role</strong></a>
+            </div>
+            <br><br><br><br>
             <div class="input-container">
                 <input type="text" [(ngModel)]="uUsers.firstName">
                 <label>First name</label>
@@ -510,17 +516,8 @@
                 <input type="text" [(ngModel)]="uUsers.lastName">
                 <label>Last name</label>
             </div>
-            <div class="input-container">
-                <input type="text" [(ngModel)]="Users.email">
-                <label>Email</label>
-            </div>
-            <div class="input-container">
-                <input type="text" [(ngModel)]="Users.role">
-                <label>Role</label>
-            </div>
             <div class="btnbox">
-                <a (click)="updateUser(current_id)" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
-                <a (click)="changeRole(current_id)" class="btn btn-white btn-animation-1"><strong>Change Role</strong></a>
+                <a (click)="updateUser(current_id)" class="btn btn-white btn-animation-1"><strong>Update</strong></a>
             </div>
         </div>
 
@@ -528,7 +525,7 @@
 
     <!--==============================VIEW ALL ROLES===============================-->
     <!--==============================================================================-->
-    <div *ngIf ="showTab == 102" id="content" class="p-4 p-md-5 pt-5">
+    <!--<div *ngIf ="showTab == 102" id="content" class="p-4 p-md-5 pt-5">
         <h2 class="text-center">View All Roles</h2>
             <div class="container-table100">
                     <div class="container">
@@ -546,6 +543,6 @@
                         </table>
                     </div>
             </div>
-    </div>
+    </div>-->
 </div>
 </body>

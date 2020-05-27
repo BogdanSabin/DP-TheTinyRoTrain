@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, FormGroup } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -27,21 +27,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { IgxTimePickerModule } from 'igniteui-angular';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RegisterComponent,
-    LoginComponent,
-    EventsComponent,
-    SpecialEventsComponent,
-    HomeComponent,
-    AboutComponent,
-    ContactComponent,
-    AdminComponent,
-    FormcontrolValidationMsgDirective,
-    FormsubmitValidationMsgDirective,
-    UserprofileComponent
+	declarations: [
+		AppComponent,
+		RegisterComponent,
+		LoginComponent,
+		EventsComponent,
+		SpecialEventsComponent,
+		HomeComponent,
+		AboutComponent,
+		ContactComponent,
+		AdminComponent,
+		FormcontrolValidationMsgDirective,
+		FormsubmitValidationMsgDirective,
+		UserprofileComponent
 
   ],
   imports: [
@@ -63,5 +64,26 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     multi: true
   }],
   bootstrap: [AppComponent]
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		FormsModule,
+		HttpClientModule,
+		ReactiveFormsModule,
+		BrowserAnimationsModule,
+		DateTimePickerModule,
+		IgxTimePickerModule,
+		ToastrModule.forRoot({
+			positionClass: 'toast-top-center'
+		})
+	],
+	providers: [AuthService, AuthGuard, EventService, LoginComponent, AdminComponent, {
+		provide: HTTP_INTERCEPTORS,
+		useClass: TokenInterceptorService,
+		multi: true
+	}],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
