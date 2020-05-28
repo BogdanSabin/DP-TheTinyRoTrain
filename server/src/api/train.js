@@ -64,7 +64,7 @@ module.exports = {
             if(ok)
                 return helper.deleteResourceByid({
                     id: routeid,
-                    Model: lib.routeModel
+                    Model: lib.trainModel
                 }, next);
         });
     }
