@@ -10,7 +10,7 @@ module.exports = {
             if(ok)
                 return helper.createResource({
                     data: data,
-                    Model: lib.routeModel,
+                    Model: lib.trainModel,
                     createFilter: lib.createFilter(data),
                     responseFilter: lib.resposeFilter
                 }, next);
@@ -24,7 +24,7 @@ module.exports = {
             if(ok)
                 return helper.updateResource({
                     data: data,
-                    Model: lib.routeModel,
+                    Model: lib.trainModel,
                     updateFilter: lib.updateFilter(data),
                     updateData: lib.updateData
                 }, next);
@@ -38,7 +38,7 @@ module.exports = {
             if(ok)
                 return helper.getResourceByid({
                     id: routeid,
-                    Model: lib.routeModel,
+                    Model: lib.trainModel,
                     responseFilter: lib.resposeFilter
                 }, next);
         });
@@ -50,14 +50,14 @@ module.exports = {
                 return next(error);
             if(ok)
                 return helper.getAllResources({
-                    Model: lib.routeModel,
+                    Model: lib.trainModel,
                     getAllFilter: lib.getAllFilter(data),
                     responseFilter: lib.resposeFilter
                 }, next);
         });
     },
 
-    deleteRouteByid: function (routeid, token, next) {
+    deleteTrain: function (routeid, token, next) {
         return authorize(token, 'admin', function (error, ok) {
             if(error)
                 return next(error);

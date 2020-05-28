@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const Model = require('./../../models').Train();
 
-module.exports.routeModel = Model;
+module.exports.trainModel = Model;
 
 module.exports.createFilter = function(data){
     return { 
@@ -16,18 +16,17 @@ module.exports.resposeFilter = function(data, next){
             return {
                 _id: r._id,
                 name: r.name,
-                departureDate: r.departureDate,
-                arrivalDate: r.arrivalDate,
-                stations: r.stations
+                wagons: r.wagons,
+                route: r.route
             }
         }));
     else
     return next(null, _.pick(data, 
-        ['_id', 'name', 'departureDate', 'arrivalDate', 'stations']))
+        ['_id', 'name', 'wagons','route']))
 }
 
 module.exports.updateFilter = function(data){
-    return {_id: data.routeid };
+    return {_id: data.trainId };
 }
 
 module.exports.updateData = function(data, next){

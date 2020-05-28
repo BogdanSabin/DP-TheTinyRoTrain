@@ -14,7 +14,7 @@ router.post('/update/:id', (req, res) =>{
     });
 });
 
-router.get('/getRoute/:id', (req, res) =>{
+router.get('/getTrain/:id', (req, res) =>{
     middleware.getTrain(req, function(error, serverRes){
         helper.respond(res, error, serverRes);
     });
