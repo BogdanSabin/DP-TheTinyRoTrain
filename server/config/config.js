@@ -24,6 +24,9 @@ module.exports = {
         gmail: {
             email: 'tinyrotrain@gmail.com',
             password: 'Tinyrotrain123'
+        },
+        google: {
+            apiKey: 'AIzaSyCzergJtxQLoSSOfOzgisstnI8MWFcrJhQ'
         }
     }
 }

@@ -1,8 +1,13 @@
 const _ = require('lodash');
+const distance = require('google-distance');
+const config = require('./../../config/config');
 const Model = require('./../../models').Ticket();
 const ModelWagon = require('./../../models').Wagon();
 const ModelTrain = require('./../../models').Train();
 const serverErrors = require('./error');
+
+distance.apiKey = config.local.google.apiKey;
+const pricekm = 5.7;
 
 module.exports.TicketModel = Model;
 
@@ -50,4 +55,21 @@ module.exports.getAllFilter = function(data){
 
 module.exports.findSolution = function(data, next){
 
+}
+
+function getPrice(origin, destination, next){
+    distance.get(
+        {
+          origin: origin,
+          destination: destination
+        },
+        function(err, data) {
+          if (err) 
+            return next(error)
+          else{
+              let dist = parseInt(data.distance.split(' ')[0])
+              return next(null, dist * pricekm)
+          }
+      });
+      
 }
