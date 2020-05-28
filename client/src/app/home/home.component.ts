@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { LoginComponent } from '../login/login.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,13 @@ export class HomeComponent implements OnInit {
 
   userDisplayName = '';
   userStorePassword = {}
-  constructor(public _authService: AuthService, private _login: LoginComponent) {}
+  
+  searchs = {
+    departure: '',
+    arrival: '',
+    date: Date
+  }
+  constructor(public _authService: AuthService, private _login: LoginComponent, private router: Router) {}
 
   ngOnInit() {
     this.userDisplayName = sessionStorage.getItem('loggedUser');
@@ -24,6 +31,13 @@ export class HomeComponent implements OnInit {
 
   public getInfo (){
     return this._login.loginUserData
+  }
+
+  searchResults(){
+    console.log(this.searchs);
+    
+    //this.router.navigate(['/results'])
+    
   }
 
 }

@@ -64,26 +64,7 @@ import { IgxTimePickerModule } from 'igniteui-angular';
     multi: true
   }],
   bootstrap: [AppComponent]
-	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		FormsModule,
-		HttpClientModule,
-		ReactiveFormsModule,
-		BrowserAnimationsModule,
-		DateTimePickerModule,
-		IgxTimePickerModule,
-		ToastrModule.forRoot({
-			positionClass: 'toast-top-center'
-		})
-	],
-	providers: [AuthService, AuthGuard, EventService, LoginComponent, AdminComponent, {
-		provide: HTTP_INTERCEPTORS,
-		useClass: TokenInterceptorService,
-		multi: true
-	}],
-	bootstrap: [AppComponent]
+	
 })
 export class AppModule {
 }

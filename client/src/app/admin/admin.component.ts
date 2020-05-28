@@ -59,7 +59,7 @@ export class AdminComponent implements OnInit {
   private _deleteStationURL = "http://localhost:11010/api/resource/station/delete/";
   private _deleteRouteURL = "http://localhost:11010/api/resource/route/delete/";
   private _deleteWagonURL = "http://localhost:11010/api/resource/wagon/delete/";
-  private _deteleTrainURL = "http://localhost:11010/api/resource/train/delete/";
+  private _deleteTrainURL = "http://localhost:11010/api/resource/train/delete/";
   private _deleteUserURL = "http://localhost:11010/api/resource/user/delete/";
 
   private _changeRoleURL = "http://localhost:11010/api/resource/user/change/";
@@ -139,9 +139,7 @@ export class AdminComponent implements OnInit {
   responseTrains: [{
     _id: '',
     name: '',
-    wagons: [{
-      name: ''
-    }],
+    wagons: [],
     route: ''
   }]
 
@@ -695,7 +693,7 @@ public handleAddressChange(address: any) {
         err => {
           if(err.status == 200){
             this.showSuccess();
-            location.reload();
+            this.getAllStations();
             this.tabToggle(5);
           }
           else{
@@ -717,6 +715,7 @@ public handleAddressChange(address: any) {
           {
             this.tabToggle(6);
             this.showSuccess();
+            this.getAllRoutes();
           }
           else{
             this.showError();
@@ -739,6 +738,28 @@ public handleAddressChange(address: any) {
           {
             this.tabToggle(7);
             this.showSuccess();
+            this.getAllWagons();
+          }
+          else{
+            this.showError();
+          }
+        }
+      )
+  }
+
+  deleteTrain(id){
+    return this.http.delete(this._deleteTrainURL+id,this.httpOptions)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.showSuccess();
+        },
+        err => {
+          if (err.status == 200)
+          {
+            this.tabToggle(7);
+            this.showSuccess();
+            this.getAllTrains();
           }
           else{
             this.showError();
@@ -758,6 +779,7 @@ public handleAddressChange(address: any) {
           if (err.status == 200)
           {
             this.showSuccess();
+            this.getAllUsers();
           }
           else{
             this.showError();

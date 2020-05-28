@@ -10,6 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { ResultsComponent } from './results/results.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'admin', component: AdminComponent},
-  { path: 'user', component:  UserprofileComponent}
+  { path: 'user', component:  UserprofileComponent},
+  { path: 'results', component: ResultsComponent}
 ];
 
 @NgModule({

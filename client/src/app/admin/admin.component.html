@@ -99,7 +99,7 @@
                                 <option value="">Select station</option>
                                 <option *ngFor="let i of responseStations">{{i.name}}</option>
                             </select>
-                                <igx-time-picker class="time-picker" formControlName="arrival" ></igx-time-picker>          
+                                <ejs-datetimepicker  id='datetimepicker' placeholder='Select Departure Date-Time ' formControlName="arrival" format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>        
                                 <button class="removebtn" (click)="removeNewStationName(i)">-</button>
                         </div>
                     </div>
@@ -313,10 +313,10 @@
                             <tbody>
                                     <tr *ngFor="let train of responseTrains">
                                         <td>{{train.name}}</td>
-                                        <td>{{train.wagons[0].name}}</td>
+                                        <td>{{train.wagons}}</td>
                                         <td>{{train.route}}</td>
                                         <td><input class="updatebtn" (click)="callUpdates(4,train._id)" type="submit" value="Update"></td>
-                                        <td><input class="deletebtn"  type="submit" value="Delete"></td>
+                                        <td><input class="deletebtn" (click)="deleteTrain(train._id)"type="submit" value="Delete"></td>
                                     </tr>
                             </tbody>
                         </table>
@@ -424,6 +424,8 @@
     </div>
 
 
+    <!--==============================UPDATE TRAIN===============================-->
+    <!--=========================================================================-->
 
     <div *ngIf ="showTab == 12" id="content" class="p-4 p-md-5 pt-5 textblack">
         <div class="box2">
@@ -522,27 +524,5 @@
         </div>
 
     </div>
-
-    <!--==============================VIEW ALL ROLES===============================-->
-    <!--==============================================================================-->
-    <!--<div *ngIf ="showTab == 102" id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="text-center">View All Roles</h2>
-            <div class="container-table100">
-                    <div class="container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Roles name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let i of roles">
-                                    <td>{{i}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-            </div>
-    </div>-->
 </div>
 </body>
