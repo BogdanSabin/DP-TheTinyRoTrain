@@ -19,7 +19,7 @@ module.exports.resposeFilter = function(data, next){
                 train: r.train,
                 wagon: r.wagon,
                 class: r.class,
-                seat: r.seat,
+                seats: r.seat,
                 departureDate: r.departureDate,
                 arrivalDate: r.arrivalDate,
                 price: r.price,
@@ -28,7 +28,7 @@ module.exports.resposeFilter = function(data, next){
         }));
     else
     return next(null, _.pick(data, 
-        ['_id', 'train', 'wagon', 'class', 'seat', 'departureDate','arrivalDate','price', 'customer']))
+        ['_id', 'train', 'wagon', 'class', 'seats', 'departureDate','arrivalDate','price', 'customer']))
 }
 module.exports.transormData = function(data, next){
     let ticket = data.solution;

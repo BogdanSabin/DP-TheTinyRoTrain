@@ -11,7 +11,7 @@ var ticketSchema = mongoose.Schema({
     price: Number,
     customer: { type: mongoose.Types.ObjectId, ref: 'User' } 
 },{
-    collection: 'trains'
+    collection: 'tickets'
 });
 
 mongoose.model('Ticket',ticketSchema);

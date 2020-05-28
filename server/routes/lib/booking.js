@@ -8,21 +8,21 @@ router.get('/find/solution', (req, res) =>{
     });
 });
 
-router.post('/book/ticket/:userid', (req, res) =>{
+router.post('/book/:userid', (req, res) =>{
     middlewate.bookTicket(req, function(error, serverRes){
-        helper.redirect(res, error, serverRes);
+        helper.respond(res, error, serverRes);
     });
 });
 
 router.get('/ticket/:ticketid', (req, res) =>{
     middlewate.getTicketById(req, function(error, serverRes){
-        helper.redirect(res, error, serverRes);
+        helper.respond(res, error, serverRes);
     });
 });
 
-router.get('/ticket/all/:userid', (req, res) =>{
+router.get('/ticket/user/:userid', (req, res) =>{
     middlewate.getAllTicketsForUser(req, function(error, serverRes){
-        helper.redirect(res, error, serverRes);
+        helper.respond(res, error, serverRes);
     });
 });
 

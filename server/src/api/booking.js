@@ -42,7 +42,7 @@ module.exports = {
                 return next(error);
             if(ok)
             return helper.getAllResources({
-                Model: lib.wagonModel,
+                Model: lib.TicketModel,
                 getAllFilter: lib.getAllFilter(data.userid),
                 responseFilter: lib.resposeFilter
             }, next);
