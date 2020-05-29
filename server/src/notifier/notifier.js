@@ -36,3 +36,23 @@ module.exports.sendConfirmationEmail = function (token, emailToSend, next) {
     });
 }
 
+module.exports.sendTicketEmail = function(data, emailToSend, next){
+    let text = "Dear, " + data.customerName + " \n Here are the details of your trip to " + data.destination + " \n train: " + data.train + " \n wagon: " + data.wagon + " \n seats: " + data.seats + "departure time:" + data.depatureTime + " arrival time: " + data.arrivalTime + " price: " + data.price + " RON";
+    
+    let mailOptions = {
+        from: config.local.gmail.email,
+        to: emailToSend,
+        subject: "Booking confirmation for trip to " + data.destination,
+        text: text
+    }
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error)
+            return next(serverError.InteralError(error));
+
+        console.log('Email sent: ' + info.response);
+        return next(null, info.response);
+    });
+    
+}
+
