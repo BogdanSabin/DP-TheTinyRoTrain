@@ -5,5 +5,6 @@ module.exports = {
     route: require('./lib/route'),
     wagon: require('./lib/wagon'),
     train: require("./lib/train"),
-    booking: require('./lib/booking')
+    booking: require('./lib/booking'),
+    images: require('./lib/images')
 }

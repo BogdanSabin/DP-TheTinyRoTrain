@@ -41,6 +41,7 @@ app.use('/api/resource/station', routes.station);
 app.use('/api/resource/route', routes.route);
 app.use('/api/resource/wagon', routes.wagon);
 app.use('/api/resource/train', routes.train);
+app.use('/api/resource/image', routes.images);
 app.use('/api/booking', routes.booking);
 
 
