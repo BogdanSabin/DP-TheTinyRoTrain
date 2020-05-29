@@ -20,16 +20,19 @@ export class HomeComponent implements OnInit {
 
   private _getClassesURL = "http://localhost:11010/api/resource/wagon/types/all";
 
+
   userDisplayName = '';
   userStorePassword = {}
   
   searchs = {
-    StationStart: '',
-    StationEnd: '',
+    stationStart: '',
+    stationEnd: '',
     numberOfTickets: '',
-    class: '',
-    date: Date
+    wagonClass: '',
+    departureData: Date
   }
+
+
   constructor(
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
@@ -75,6 +78,14 @@ export class HomeComponent implements OnInit {
       console.log(this.classes)},
       res => { console.log(res)}
     )
+  }
+
+  localSearch(){
+    localStorage.setItem('stationstart',this.searchs.stationStart);
+    localStorage.setItem('stationsent',this.searchs.stationEnd);
+    localStorage.setItem('numberoftickets',this.searchs.numberOfTickets);
+    localStorage.setItem('departuredata',this.searchs.departureData.toString());
+
   }
 
 }

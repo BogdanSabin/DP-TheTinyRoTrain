@@ -43,23 +43,25 @@
                                 <tr>
                                     <th>Train</th>
                                     <th>Wagon</th>
-                                    <th>Class</th>
                                     <th>Seats</th>
+                                    <th>Route</th>
+                                    <th>Distance</th>
+                                    <th>Class</th>
                                     <th>Departure Date</th>
-                                    <th>Arrival Date</th>
                                     <th>Price</th>
                                     <th>Buy Tickets</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>
-                                        <td>ce</td>
-                                        <td>va</td>
-                                        <td>dada</td>
-                                        <td>dada</td>
-                                        <td>dada</td>
-                                        <td>dada</td>
-                                        <td>dada</td>
+                                    <tr *ngFor="let i of responseResults">
+                                        <td>{{i.trainName}}</td>
+                                        <td>{{i.wagonName}}</td>
+                                        <td>{{i.seats}}</td>
+                                        <td>{{i.route}}</td>
+                                        <td>{{i.distance}}</td>
+                                        <td>{{i.class}}</td>
+                                        <td>{{i.departureDate}}</td>
+                                        <td>{{i.price}}</td>
                                         <td><input class="updatebtn" (click)="buyTicket()"type="submit" value="Buy Ticket"></td>
                                     </tr>
                             </tbody>

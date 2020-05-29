@@ -14,18 +14,28 @@ import { ToastrService } from 'ngx-toastr';
 export class ResultsComponent implements OnInit {
 
   private _buyTicketURL = "http://localhost:11010/api/booking/book/";
+  private _getResultsURL = "http://localhost:11010/api/booking/find/solution";
 
   userDisplayName = '';
+  searchs = {
+    stationStart: '',
+    stationEnd: '',
+    numberOfTickets: '',
+    wagonClass: '',
+    departureData: ''
+  }
 
-  responseClasses: [{
-    trainName: 'dada',
-    trainid: 'dada',
-    wagon: 'dada',
-    wagonid: 'dada',
-    price: 'dada',
-    seats: ["dd"],
-    departureDate: Date,
-    arrivalDate: Date
+  responseSearch: [{
+    trainName: '',
+    trainId: '',
+    wagonName: '',
+    wagonId: '',
+    price: '',
+    seats: [],
+    route: '',
+    distance: ''
+    departureDate: Date;
+    class: ''
   }]
 
   tickets= {
@@ -53,10 +63,15 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit() {
     this.getInfo()
-    this.userDisplayName = localStorage.getItem('_name_');   
+    this.userDisplayName = localStorage.getItem('_name_');
+    this.getResults();   
   }
 
   public getInfo (){
+    this.searchs.stationStart=localStorage.getItem('stationstart');
+    this.searchs.stationEnd=localStorage.getItem('stationend');
+    this.searchs.numberOfTickets= localStorage.getItem('numberoftickets');
+    this.searchs.departureData=localStorage.getItem('departuredata');
     return this._login.loginUserData
   }
 
@@ -87,5 +102,13 @@ export class ResultsComponent implements OnInit {
       )
   }
 
+  getResults(){
+    return this.http.post<any>(this._getResultsURL, this.searchs, this.httpOptions)
+      .subscribe(
+        res => { console.log(res)
+          this.responseSearch = res
+        }
+      )
+  }
 
 }

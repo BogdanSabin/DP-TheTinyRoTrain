@@ -107,11 +107,11 @@
 							<div action="#" class="home_search_form" id="home_search_form">
 								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
 									<div class="input-container">
-										<input [(ngModel)]="searchs.StationStart" type="text" required>
+										<input [(ngModel)]="searchs.stationStart" type="text" required>
 										<label>Source</label>
 									</div>
 									<div class="input-container">
-										<input [(ngModel)]="searchs.StationEnd" type="text" required>
+										<input [(ngModel)]="searchs.stationEnd" type="text" required>
 										<label>Target</label>
 									</div>
 									<div class="input-container">
@@ -119,11 +119,11 @@
 										<label>Tickets</label>
 									</div>
 
-									<select class="select-box" [(ngModel)]="searchs.class" >
+									<select class="select-box" [(ngModel)]="searchs.wagonClass" >
 										<option value="">Select Class</option>
 										<option *ngFor="let i of classes">{{i}}</option>
 									</select>
-									<ejs-datetimepicker  id='datetimepicker' placeholder='Select Date-time'  [(ngModel)]="searchs.date" format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>
+									<ejs-datetimepicker  id='datetimepicker' placeholder='Select Date-time'  [(ngModel)]="searchs.departureData" format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>
 									<button class="home_search_button" (click)=searchResults()>search</button>
 								</div>
 							</div>
