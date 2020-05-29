@@ -9,7 +9,6 @@
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
 									<li class="active"><a href="home">Home</a></li>
-									<li><a href="../about">About us</a></li>
 									<li *ngIf=_authService.loggedIn()><a *ngIf="_authService.loggedAdmin() && _authService.loggedIn()" href="../admin">Admin</a></li>
 									<li><a *ngIf="!_authService.loggedIn()"  routerLink="/login" routerLinkActive="active">Login</a>
                                     <a class="logoutt" *ngIf=_authService.loggedIn() (click)="_authService.logoutUser()">Logout</a></li>
@@ -54,17 +53,15 @@
                                     <th>Wagon</th>
                                     <th>Class</th>
                                     <th>Departure Date</th>
-                                    <th>Arrival Date</th>
                                     <th>Price</th>
                                 </tr>
                             </thead>
                             <tbody>
                                     <tr *ngFor="let ticket of responseTickets">
-                                        <td>{{ticket.train}}</td>
-                                        <td>{{ticket.wagon}}</td>
+                                        <td>{{ticket.train.name}}</td>
+                                        <td>{{ticket.wagon.name}}</td>
                                         <td>{{ticket.class}}</td>
                                         <td>{{ticket.departureDate | date:"dd.MM.y"}}</td>
-                                        <td>{{ticket.arrivalDate | date:"dd.MM.y"}}</td>
                                         <td>{{ticket.price}}</td>
                                     </tr>
                             </tbody>

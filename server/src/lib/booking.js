@@ -83,6 +83,10 @@ module.exports.findSolution = function(data, next){
                 f.departureData = data.departureData;
                 f.price = (distance * pricekm) + f.priceW;
             })
+            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            console.log(solutions);
+            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            
             return next(null, solutions);
         })
         .catch(function(reason){
@@ -173,8 +177,14 @@ function getDistance(origin, destination){
             destination: destination
             },
             function(err, data) {
-            if (err) 
+            if (err){ 
+                console.log(typeof origin);
+                console.log(typeof destination);
+                console.log(origin);
+                console.log(destination);
+                
                 return reject(error);
+            }
             else{
                 let dist = parseInt(data.distance.split(' ')[0])
                 return resolve(dist)
@@ -191,8 +201,13 @@ module.exports.populate = function(docs, next){
         .exec(function(error, data){
             if(error)
                 return next(error);
-            else
+            else{
+                data.forEach(d =>{
+                    d.train = d.train.name;
+                    d.wagon = d.wagon.name;
+                });
                 return next(null, data);
+            }
         })
     }
     else 

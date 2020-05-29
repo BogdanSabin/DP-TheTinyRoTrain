@@ -29,6 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { IgxTimePickerModule } from 'igniteui-angular';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
 	declarations: [
@@ -43,7 +44,8 @@ import { IgxTimePickerModule } from 'igniteui-angular';
 		AdminComponent,
 		FormcontrolValidationMsgDirective,
 		FormsubmitValidationMsgDirective,
-		UserprofileComponent
+    UserprofileComponent,
+    ResultsComponent
 
   ],
   imports: [

@@ -23,7 +23,7 @@ export class UserprofileComponent implements OnInit {
     class: '',
     departureDate: '',
     arrivalDate: '',
-    price: ''
+    price: Number
     }]
   constructor(
     public _authService: AuthService,

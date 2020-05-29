@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
 
   searchResults(){
     if(localStorage.getItem('token') != null){
+      this.localSearch();
       this._router.navigate(['/results'])
     }
     else{
@@ -84,8 +85,10 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('stationstart',this.searchs.stationStart);
     localStorage.setItem('stationsent',this.searchs.stationEnd);
     localStorage.setItem('numberoftickets',this.searchs.numberOfTickets);
+    localStorage.setItem('classWagon',this.searchs.wagonClass);
     localStorage.setItem('departuredata',this.searchs.departureData.toString());
-
+    console.log("AAAAAAA " + this.searchs.stationEnd);
+    
   }
 
 }

@@ -7,8 +7,11 @@ module.exports = {
             stationEnd: req.body.stationEnd,
             numberOfTickets: parseInt(req.body.numberOfTickets,10),
             wagonClass: req.body.wagonClass,
-            departureData: req.body.departureData,
+            departureData:  new Date(req.body.departureData)
         }
+        console.log(req.body.departureData)
+        console.log("Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        console.log(data);
         return api.findSolution(data, next);
     },
 

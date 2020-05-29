@@ -9,7 +9,6 @@
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-start justify-content-start">
 									<li class="active"><a href="home">Home</a></li>
-									<li><a href="../about">About us</a></li>
                                     <li><a class="logoutt" (click)="_authService.logoutUser()">Logout</a></li>
                                 </ul>
 							</nav>
@@ -53,16 +52,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr *ngFor="let i of responseResults">
-                                        <td>{{i.trainName}}</td>
-                                        <td>{{i.wagonName}}</td>
-                                        <td>{{i.seats}}</td>
-                                        <td>{{i.route}}</td>
-                                        <td>{{i.distance}}</td>
-                                        <td>{{i.class}}</td>
-                                        <td>{{i.departureDate}}</td>
-                                        <td>{{i.price}}</td>
-                                        <td><input class="updatebtn" (click)="buyTicket(i.trainId, i.wagonId,i.class,i.seats,i.departureDate, i.price)"type="submit" value="Buy Ticket"></td>
+                                    <tr *ngFor="let i2 of responseSearch">
+                                        <td>{{i2.trainName}}</td>
+                                        <td>{{i2.wagonName}}</td>
+                                        <td>{{i2.seats}}</td>
+                                        <td>{{i2.route}}</td>
+                                        <td>{{i2.distance}}</td>
+                                        <td>{{i2.class}}</td>
+                                        <td>{{i2.departureData | date:"dd.MM.y"}}</td>
+                                        <td>{{i2.price}}</td>
+                                        <td><input class="updatebtn" (click)="buyTicket(i2.trainId, i2.wagonId,i2.class,i2.seats,i2.departureData, i2.price)"type="submit" value="Buy Ticket"></td>
                                     </tr>
                             </tbody>
                         </table>

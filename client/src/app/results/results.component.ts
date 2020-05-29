@@ -26,16 +26,16 @@ export class ResultsComponent implements OnInit {
     departureData: ''
   }
 
-  responseSearch: [{
+  responseSearch = [{
     trainName: '',
     trainId: '',
     wagonName: '',
     wagonId: '',
-    price: '',
+    price: Number,
     seats: [],
     route: '',
-    distance: ''
-    departureDate: Date;
+    distance: Number,
+    departureDate: Date,
     class: ''
   }]
 
@@ -60,15 +60,16 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit() {
     this.getInfo()
-    this.userDisplayName = localStorage.getItem('_name_');
-    this.getResults();   
+    this.userDisplayName = localStorage.getItem('_name_');   
   }
 
   public getInfo (){
     this.searchs.stationStart=localStorage.getItem('stationstart');
-    this.searchs.stationEnd=localStorage.getItem('stationend');
+    this.searchs.stationEnd=localStorage.getItem('stationsent');
     this.searchs.numberOfTickets= localStorage.getItem('numberoftickets');
     this.searchs.departureData=localStorage.getItem('departuredata');
+    this.searchs.wagonClass=localStorage.getItem('classWagon');
+    this.getResults();
     return this._login.loginUserData
   }
 
@@ -97,7 +98,9 @@ export class ResultsComponent implements OnInit {
     return this.http.post(this._buyTicketURL+localStorage.getItem('_id'),this.tickets, this.httpOptions)
       .subscribe(
         res => { 
-          this.showSuccess();
+          this.router.navigate(['/user']).then(()=>{
+            window.location.reload();
+          });
         },
         err => {
           this.showError();
@@ -108,8 +111,16 @@ export class ResultsComponent implements OnInit {
   getResults(){
     return this.http.post<any>(this._getResultsURL, this.searchs, this.httpOptions)
       .subscribe(
-        res => { console.log(res)
-          this.responseSearch = res
+        data =>{
+          console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + data);
+          console.log(data);
+          this.responseSearch = data;
+          console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA2")
+          console.log(this.responseSearch);
+        },
+        res => { 
+          console.log("BBBBBBBBBBBBBBB" + res)
+          //this.responseSearch = res
         }
       )
   }
