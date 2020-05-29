@@ -293,6 +293,21 @@ thead th {
   background-color: #000;
 }
 
+#datetimepicker2{
+  margin-left: 5em;
+}
+
+select{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  border-bottom:1px solid black;
+  text-align: center;
+}
+
+select::-ms-expand{
+  display: none;
+}
 
 
 

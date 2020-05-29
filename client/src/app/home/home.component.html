@@ -12,7 +12,6 @@
 								<ul class="d-flex flex-row align-items-start justify-content-start">
 									<li class="active"><a href="home">Home</a></li>
 									<li><a href="../about">About us</a></li>
-									<li><a href="../contact">Contact</a></li>
 									<li *ngIf=_authService.loggedIn()><a *ngIf="_authService.loggedAdmin() && _authService.loggedIn()" href="../admin">Admin</a></li>
 									<li><a *ngIf="!_authService.loggedIn()"  routerLink="/login" routerLinkActive="active">Login</a>
                                     <a class="logout" *ngIf=_authService.loggedIn() (click)="_authService.logoutUser()">Logout</a></li>
@@ -107,8 +106,23 @@
 						<div class="home_search_content">
 							<div action="#" class="home_search_form" id="home_search_form">
 								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
-									<input type="text" class="search_input search_input_2" placeholder="Departure" [(ngModel)]="searchs.departure" required="required">
-									<input type="text" class="search_input search_input_3" placeholder="Arrival" [(ngModel)]="searchs.arrival" required="required">
+									<div class="input-container">
+										<input [(ngModel)]="searchs.StationStart" type="text" required>
+										<label>Source</label>
+									</div>
+									<div class="input-container">
+										<input [(ngModel)]="searchs.StationEnd" type="text" required>
+										<label>Target</label>
+									</div>
+									<div class="input-container">
+										<input [(ngModel)]="searchs.numberOfTickets" type="text" required>
+										<label>Tickets</label>
+									</div>
+
+									<select class="select-box" [(ngModel)]="searchs.class" >
+										<option value="">Select Class</option>
+										<option *ngFor="let i of classes">{{i}}</option>
+									</select>
 									<ejs-datetimepicker  id='datetimepicker' placeholder='Select Date-time'  [(ngModel)]="searchs.date" format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>
 									<button class="home_search_button" (click)=searchResults()>search</button>
 								</div>
@@ -123,7 +137,6 @@
 	<!-- Intro -->
 
 	<div class="intro">
-		<div class="intro_background" style="background-image:url(../../assets/images/intro.png)"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -177,7 +190,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col text-center">
-					<div class="section_subtitle">simply amazing places</div>
+					<div class="section_subtitle">Team Speack</div>
 					<div class="section_title"><h2>Testimonials</h2></div>
 				</div>
 			</div>
@@ -190,33 +203,51 @@
 							
 							<!-- Slide -->
 							<div class="owl-item text-center">
-								<div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. lobortis dolor. Cras placerat lectus a posuere aliquet. Curabitur quis vehicula odio.</div>
+								<div class="testimonial">Be Smart, Choose us for the best experience</div>
 								<div class="testimonial_author">
 									<div class="testimonial_author_content d-flex flex-row align-items-end justify-content-start">
-										<div>john turner,</div>
-										<div>client</div>
+										<div>Team TinyRoTrain,</div>
+										<div>:)</div>
 									</div>
 								</div>
 							</div>
 
 							<!-- Slide -->
 							<div class="owl-item text-center">
-								<div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. lobortis dolor. Cras placerat lectus a posuere aliquet. Curabitur quis vehicula odio.</div>
+								<div class="testimonial">Live you life to maximum , every minute counts</div>
 								<div class="testimonial_author">
 									<div class="testimonial_author_content d-flex flex-row align-items-end justify-content-start">
-										<div>john turner,</div>
-										<div>client</div>
+										<div>Petrisor Paul-Andrei</div>
+										<div>Designer</div>
 									</div>
 								</div>
 							</div>
 
 							<!-- Slide -->
 							<div class="owl-item text-center">
-								<div class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. lobortis dolor. Cras placerat lectus a posuere aliquet. Curabitur quis vehicula odio.</div>
+								<div class="testimonial">Yooo GUYS, what's up</div>
 								<div class="testimonial_author">
 									<div class="testimonial_author_content d-flex flex-row align-items-end justify-content-start">
-										<div>john turner,</div>
-										<div>client</div>
+										<div>Mema Mihai-Raul</div>
+										<div>:P</div>
+									</div>
+								</div>
+							</div>
+							<div class="owl-item text-center">
+								<div class="testimonial">Heeeey</div>
+								<div class="testimonial_author">
+									<div class="testimonial_author_content d-flex flex-row align-items-end justify-content-start">
+										<div>Iorga Adina</div>
+										<div>Assistant</div>
+									</div>
+								</div>
+							</div>
+							<div class="owl-item text-center">
+								<div class="testimonial">Be smart and keep your calm</div>
+								<div class="testimonial_author">
+									<div class="testimonial_author_content d-flex flex-row align-items-end justify-content-start">
+										<div>Melciu Bogdan</div>
+										<div>Leader</div>
 									</div>
 								</div>
 							</div>
@@ -245,17 +276,8 @@
 				<div class="col">
 					<div class="newsletter">
 						<div class="newsletter_title_container text-center">
-							<div class="newsletter_title">Subscribe to our newsletter to get the latest trends & news</div>
+							<div class="newsletter_title">Join by travelling with us !!</div>
 							<div class="newsletter_subtitle">Join our database NOW!</div>
-						</div>
-						<div class="newsletter_form_container">
-							<form action="#" class="newsletter_form d-flex flex-md-row flex-column align-items-start justify-content-between" id="newsletter_form">
-								<div class="d-flex flex-md-row flex-column align-items-start justify-content-between">
-									<div><input type="text" class="newsletter_input newsletter_input_name" id="newsletter_input_name" placeholder="Name" required="required"><div class="input_border"></div></div>
-									<div><input type="email" class="newsletter_input newsletter_input_email" id="newsletter_input_email" placeholder="Your e-mail" required="required"><div class="input_border"></div></div>
-								</div>
-								<div><button class="newsletter_button">subscribe</button></div>
-							</form>
 						</div>
 					</div>
 				</div>
@@ -285,7 +307,7 @@
 								<div class="footer_contact_title">come & drop by</div>
 								<div class="footer_contact_list">
 									<ul style="max-width:190px">
-										<li>4124 Barnes Street, Sanford, FL 32771</li>
+										<li>3123 Timisoara, Romania</li>
 									</ul>
 								</div>
 							</div>
@@ -295,11 +317,11 @@
 						<div class="col-xl-4 footer_contact_col">
 							<div class="footer_contact_item d-flex flex-column align-items-center justify-content-start text-center">
 								<div class="footer_contact_icon"><img src="images/around.svg" alt=""></div>
-								<div class="footer_contact_title">send us a message</div>
+								<div class="footer_contact_title">Send us a message</div>
 								<div class="footer_contact_list">
 									<ul>
-										<li>youremail@gmail.com</li>
-										<li>Office@yourbusinessname.com</li>
+										<li>master@email.ro</li>
+										<li>Office@TinyRoTrain.com</li>
 									</ul>
 								</div>
 							</div>

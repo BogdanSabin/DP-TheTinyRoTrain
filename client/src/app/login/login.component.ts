@@ -37,11 +37,21 @@ export class LoginComponent implements OnInit {
       res => {
         localStorage.setItem('token', res.token)
         localStorage.setItem('role',res.role)
+        localStorage.setItem('_id',res._id)
+        localStorage.setItem('_name_',res.name)
+        console.log(res);
+        
         if(res.role === 'master'){
           this._router.navigate(['/admin'])
+            .then(() => {
+            window.location.reload();
+          })
         }
-        else if(res.role === 'user'){
+        else if(res.role === 'user' || res.role === 'admin'){
           this._router.navigate(['/home'])
+            .then(() => {
+              window.location.reload();
+            })
         }
       },
       err => {console.log(err)

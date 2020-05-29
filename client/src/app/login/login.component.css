@@ -93,6 +93,7 @@
     margin-top: 60px;
     text-align: center;
     font-size: 13px;
+    color: #000;
   }
 
   .fas{
@@ -102,4 +103,14 @@
     font-size: 15px;
     color: #3498db;
     cursor: pointer;
+  }
+
+  h1{
+    margin-top: 0em;
+    font-size: 50px;
+    color: #000;
+  }
+
+  a{
+    font-weight: bold;
   }

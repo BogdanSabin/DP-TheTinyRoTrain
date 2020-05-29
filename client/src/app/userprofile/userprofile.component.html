@@ -1,1 +1,80 @@
-<p>userprofile works!</p>
+<body>
+    <header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start">
+						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+							<div class="logo"><a href="">{{userDisplayName}}</a></div>
+							<nav class="main_nav">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li class="active"><a href="home">Home</a></li>
+									<li><a href="../about">About us</a></li>
+									<li *ngIf=_authService.loggedIn()><a *ngIf="_authService.loggedAdmin() && _authService.loggedIn()" href="../admin">Admin</a></li>
+									<li><a *ngIf="!_authService.loggedIn()"  routerLink="/login" routerLinkActive="active">Login</a>
+                                    <a class="logoutt" *ngIf=_authService.loggedIn() (click)="_authService.logoutUser()">Logout</a></li>
+                                </ul>
+							</nav>
+                            <label class="hoverable" for="fileInput">
+                                <img [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'"> 
+                                <div class="hover-text"><strong> Change</strong></div>
+                                <div class="background"></div>
+                            </label>
+                              <br/>
+                              <input id="fileInput" type='file' (change)="onSelectFile($event)">
+                              
+
+							<!-- Hamburger -->
+
+							<div class="hamburger ml-auto">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+        <p class="role"><strong>Role : </strong><strong class="role_white">{{loggedRole}}</strong></p>
+        <input class="input-delete" *ngIf="url" (click)="delete()" value="Remove Image">
+	</header>
+
+
+    <!--=============================VIEW ALL ROUTES=============================-->
+    <!----------------------------------------------------------------------------->
+
+    <div class="MAIN">
+        <h2 class="text-center"><strong>Your Tickets</strong></h2>
+            <div class="container-table100">                
+                    <div class="container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Train</th>
+                                    <th>Wagon</th>
+                                    <th>Class</th>
+                                    <th>Departure Date</th>
+                                    <th>Arrival Date</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr *ngFor="let ticket of responseTickets">
+                                        <td>{{ticket.train}}</td>
+                                        <td>{{ticket.wagon}}</td>
+                                        <td>{{ticket.class}}</td>
+                                        <td>{{ticket.departureDate | date:"dd.MM.y"}}</td>
+                                        <td>{{ticket.arrivalDate | date:"dd.MM.y"}}</td>
+                                        <td>{{ticket.price}}</td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+    </div>
+
+    <!--=============================Profile Image=============================-->
+    <!----------------------------------------------------------------------------->
+
+
+</body>

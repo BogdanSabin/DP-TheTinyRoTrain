@@ -255,9 +255,6 @@ public handleAddressChange(address: any) {
 
 
 
-
-
-
   
   showTab = 0;
   tabToggle(index){
@@ -419,16 +416,16 @@ public handleAddressChange(address: any) {
   train={
     name: '',
     route: '',
-    wagon: []
+    wagons: []
   }
   createTrain(){
     console.log(this.Trains)
-    this.train.wagon = this.Trains.wagons.map((m)=>{
+    this.train.wagons = this.Trains.wagons.map((m)=>{
       return m.name;
     })
     this.train.name=this.Trains.name;
     this.train.route=this.Trains.route;
-    
+    console.log(this.train);
     return this.http.post(this._createTrainURL, this.train, this.httpOptions)
       .subscribe(
         res=> {
@@ -471,8 +468,11 @@ public handleAddressChange(address: any) {
   getAllTrains(){
     return this.http.get<any>(this._getAllTrainsURL, this.httpOptions)
       .subscribe(
-        data => {this.responseTrains = data},
-        res => { console.log(res)}
+        data => {
+          console.log(data);
+          this.responseTrains = data},
+        res => { console.log(res)
+        }
       )
   }
 
@@ -756,8 +756,7 @@ public handleAddressChange(address: any) {
         },
         err => {
           if (err.status == 200)
-          {
-            this.tabToggle(7);
+          {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             this.showSuccess();
             this.getAllTrains();
           }

@@ -23,6 +23,9 @@ private _loginUrl = "http://localhost:11010/api/authentication/login";
   public logoutUser(){
     localStorage.removeItem('token')
     this._router.navigate(['/home'])
+    .then(() => {
+      window.location.reload();
+    })
   }
 
   public loggedAdmin(){

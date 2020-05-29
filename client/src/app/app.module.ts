@@ -4,6 +4,7 @@ import { FormsModule, FormGroup } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -56,7 +57,8 @@ import { IgxTimePickerModule } from 'igniteui-angular';
     ToastrModule.forRoot({
       positionClass: 'toast-top-center'
     }),
-    GooglePlaceModule
+    GooglePlaceModule,
+    CommonModule
   ],
   providers: [AuthService, AuthGuard, EventService, LoginComponent, AdminComponent, {
     provide: HTTP_INTERCEPTORS,

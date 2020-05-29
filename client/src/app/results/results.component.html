@@ -1,12 +1,34 @@
 <body>
-    <ul>
-        <li class="active"><a href="home">Home</a></li>
-		<li><a href="../about">About us</a></li>
-		<li><a href="../contact">Contact</a></li>
-		<li *ngIf=_authService.loggedIn()><a *ngIf="_authService.loggedAdmin() && _authService.loggedIn()" href="../admin">Admin</a></li>
-		<li><a *ngIf="!_authService.loggedIn()"  routerLink="/login" routerLinkActive="active">Login</a>
-        <a class="logout" *ngIf=_authService.loggedIn() (click)="_authService.logoutUser()">Logout</a></li>
-    </ul>
+    <header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start">
+						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+							<div class="logo"><a href="home">TinyRoTrain</a></div>
+							<nav class="main_nav">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li class="active"><a href="home">Home</a></li>
+									<li><a href="../about">About us</a></li>
+                                    <li><a class="logoutt" (click)="_authService.logoutUser()">Logout</a></li>
+                                </ul>
+							</nav>
+							<div class="header_phone ml-auto">
+								Welcome     <a href="../user">{{userDisplayName}}</a>
+							</div>
+
+							<!-- Hamburger -->
+
+							<div class="hamburger ml-auto">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 
 
     <!--=============================VIEW ALL ROUTES=============================-->
@@ -19,9 +41,13 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Departure</th>
-                                    <th>Arrival</th>
-                                    <th>Date</th>
+                                    <th>Train</th>
+                                    <th>Wagon</th>
+                                    <th>Class</th>
+                                    <th>Seats</th>
+                                    <th>Departure Date</th>
+                                    <th>Arrival Date</th>
+                                    <th>Price</th>
                                     <th>Buy Tickets</th>
                                 </tr>
                             </thead>
@@ -30,7 +56,11 @@
                                         <td>ce</td>
                                         <td>va</td>
                                         <td>dada</td>
-                                        <td><input class="updatebtn" type="submit" value="Buy Ticket"></td>
+                                        <td>dada</td>
+                                        <td>dada</td>
+                                        <td>dada</td>
+                                        <td>dada</td>
+                                        <td><input class="updatebtn" (click)="buyTicket()"type="submit" value="Buy Ticket"></td>
                                     </tr>
                             </tbody>
                         </table>

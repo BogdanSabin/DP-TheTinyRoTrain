@@ -99,7 +99,7 @@
                                 <option value="">Select station</option>
                                 <option *ngFor="let i of responseStations">{{i.name}}</option>
                             </select>
-                                <ejs-datetimepicker  id='datetimepicker' placeholder='Select Departure Date-Time ' formControlName="arrival" format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>        
+                                <ejs-datetimepicker  id='datetimepicker2' placeholder='Select Departure Date-Time ' formControlName="arrival" format ='yyyy.MM.dd HH:mm'></ejs-datetimepicker>        
                                 <button class="removebtn" (click)="removeNewStationName(i)">-</button>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                         <div [formGroup]="wagon" class="form-row">
                             <select class="select-input2" formControlName="name">
                                 <option value="">Select wagon</option>
-                                <option *ngFor="let i of responseWagons">{{i._id}}</option>
+                                <option *ngFor="let i of responseWagons" [value]="i._id">{{i.name}}</option>
                             </select>        
                                 <button class="removebtn" (click)="removeNewWagonName(i)">-</button>
                         </div>
@@ -388,7 +388,7 @@
             </div>
             <br><br>
             <div class="btnbox">
-                <a (click)="updateRoute(current_id)" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+                <a (click)="updateRoute(current_id)" class="btn btn-white btn-animation-1"><strong>Update</strong></a>
             </div>
             </div>
     </div>
@@ -418,7 +418,7 @@
                 <label>Seat Price</label>
             </div>
             <div class="btnbox">
-                <a  (click)="updateWagon(current_id)" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+                <a  (click)="updateWagon(current_id)" class="btn btn-white btn-animation-1"><strong>Update</strong></a>
             </div>
         </div>
     </div>
@@ -455,7 +455,7 @@
 
             <br><br>
             <div class="btnbox">
-                <a (click)="createTrain()" class="btn btn-white btn-animation-1"><strong>Create</strong></a>
+                <a (click)="updateTrain(current_id)" class="btn btn-white btn-animation-1"><strong>Update</strong></a>
             </div>
             </div>
     </div>
