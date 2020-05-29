@@ -79,6 +79,8 @@ module.exports.findSolution = function(data, next){
         .then(function(distance){
             solutions.forEach(f =>{
                 f.distance = distance;
+                f.class = data.wagonClass;
+                f.departureData = data.departureData;
                 f.price = (distance * pricekm) + f.priceW;
             })
             return next(null, solutions);
@@ -179,4 +181,20 @@ function getDistance(origin, destination){
             }
         });
     });     
+}
+
+module.exports.populate = function(docs, next){
+    if(_.isArray(docs)){
+        Model.find({})
+        .populate('train', 'name -_id')
+        .populate('wagon', 'name -_id')
+        .exec(function(error, data){
+            if(error)
+                return next(error);
+            else
+                return next(null, data);
+        })
+    }
+    else 
+        return next(null, docs);
 }

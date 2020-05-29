@@ -44,6 +44,7 @@ module.exports = {
             return helper.getAllResources({
                 Model: lib.TicketModel,
                 getAllFilter: lib.getAllFilter(data.userid),
+                populate: lib.populate,
                 responseFilter: lib.resposeFilter
             }, next);
         });

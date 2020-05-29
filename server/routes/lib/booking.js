@@ -2,7 +2,7 @@ const router = require('express').Router();
 const middlewate = require('./../../middleware').booking;
 const helper = require('./helper');
 
-router.get('/find/solution', (req, res) =>{
+router.post('/find/solution', (req, res) =>{
     middlewate.findSolution(req, function(error, serverRes){
         helper.respond(res, error, serverRes);
     });

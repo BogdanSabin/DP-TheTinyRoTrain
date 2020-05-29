@@ -5,7 +5,7 @@ module.exports = {
         let data = {
             stationStart: req.body.stationStart,
             stationEnd: req.body.stationEnd,
-            numberOfTickets: req.body.numberOfTickets,
+            numberOfTickets: parseInt(req.body.numberOfTickets,10),
             wagonClass: req.body.wagonClass,
             departureData: req.body.departureData,
         }
