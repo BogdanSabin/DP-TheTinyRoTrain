@@ -95,6 +95,12 @@ module.exports.getResourceByid = function(options, next){
         return next(serverError.MissingArgument('Model in function getResourceByid'));
     let Model = options.Model;
 
+    if(!options.populate)
+        options.populate = function(data, next){
+            return next(null, data);
+        }
+    let populate = options.populate;
+
     if(!options.responseFilter)
         options.responseFilter = function(data, next){
             return next(null, data);
@@ -108,13 +114,23 @@ module.exports.getResourceByid = function(options, next){
         if(!doc)
             return next(serverError.NodataFound());
         
-        responseFilter(doc, function(error, data){
+        populate(doc, function(error, populated){
             if(error)
                 return next(serverError.InteralError(error));
-            if(!data)
+            
+            if(!populated)
                 return next(serverError.NodataFound());
 
+            responseFilter(populated, function(error, data){
+                if(error)
+                    return next(serverError.InteralError(error));
+                if(!data)
+                    return next(serverError.NodataFound());
+
+                return next(null, data);        
             return next(null, data);        
+                return next(null, data);        
+            });
         });
     });
 }
@@ -128,6 +144,12 @@ module.exports.getAllResources = function(options, next){
         options.getAllFilter = {};
     let filter = options.getAllFilter;
 
+    if(!options.populate)
+        options.populate = function(data, next){
+            return next(null, data);
+        }
+    let populate = options.populate;
+    
     if(!options.responseFilter)
         options.responseFilter = function(data, next){
             return next(null, data);
@@ -136,18 +158,26 @@ module.exports.getAllResources = function(options, next){
 
     Model.find(filter, function(error, docs){
         if(error)
-            return next(serverErrors.InteralError(error));
+            return next(serverError.InteralError(error));
         if(!docs)
-            return next(serverErrors.NodataFound());
-
-        responseFilter(docs, function(error, newData){
+            return next(serverError.NodataFound());
+        
+        populate(docs, function(error, populated){
             if(error)
-                return next(serverErrors.InteralError(error));
+                return next(serverError.InteralError(error));
             
-            if(!newData)
-                return next(serverErrors.NodataFound());
+            if(!populated)
+                return next(serverError.NodataFound());
+            
+            responseFilter(populated, function(error, newData){
+                if(error)
+                    return next(serverError.InteralError(error));
                 
-            return next(null, newData);
+                if(!newData)
+                    return next(serverError.NodataFound());
+                    
+                return next(null, newData);
+            });
         });
     });
 }

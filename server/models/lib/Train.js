@@ -4,7 +4,7 @@ const getConnection = require('./getConnection').getConnection;
 var trainSchema = mongoose.Schema({
     name: String,
     route: { type: mongoose.Types.ObjectId, ref: 'Route' },
-    wagons: [String]
+    wagons: [{ type: mongoose.Types.ObjectId, ref: 'Wagon' }]
 },{
     collection: 'trains'
 });

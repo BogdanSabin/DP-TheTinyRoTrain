@@ -39,7 +39,8 @@ module.exports = {
                 return helper.getResourceByid({
                     id: routeid,
                     Model: lib.trainModel,
-                    responseFilter: lib.resposeFilter
+                    populate: lib.populate,
+                    responseFilter: lib.resposeFilterGet
                 }, next);
         });
     },
@@ -52,7 +53,8 @@ module.exports = {
                 return helper.getAllResources({
                     Model: lib.trainModel,
                     getAllFilter: lib.getAllFilter(data),
-                    responseFilter: lib.resposeFilter
+                    populate: lib.populate,
+                    responseFilter: lib.resposeFilterGet
                 }, next);
         });
     },
