@@ -4,6 +4,7 @@ import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { setMaxListeners } from 'cluster';
 
 
 @Component({
@@ -39,15 +40,11 @@ export class ResultsComponent implements OnInit {
   }]
 
   tickets= {
-    train: '5ed01fac0ab5f035430baff4',
-    wagon: '5eaa8f3d2659b84a5257395b',
-    class: 'i',
-    seats: [
-      's11',
-      's2'
-    ],
-    departureDate: '2020-05-29T14:40:43.290z',
-    arrivalDate: '2020-05-29T20:40:43.290z',
+    train: '',
+    wagon: '',
+    class: '',
+    seats: [],
+    departureDate: '',
     price: 20
   }
 
@@ -90,7 +87,13 @@ export class ResultsComponent implements OnInit {
     })
   }
 
-  buyTicket(){
+  buyTicket(trainid,wagonid,classid,seatsid,departuredateid,priceid){
+    this.tickets.train=trainid;
+    this.tickets.wagon=wagonid;
+    this.tickets.class=classid;
+    this.tickets.seats=seatsid;
+    this.tickets.departureDate=departuredateid;
+    this.tickets.price=priceid;
     return this.http.post(this._buyTicketURL+localStorage.getItem('_id'),this.tickets, this.httpOptions)
       .subscribe(
         res => { 
@@ -110,5 +113,6 @@ export class ResultsComponent implements OnInit {
         }
       )
   }
+
 
 }

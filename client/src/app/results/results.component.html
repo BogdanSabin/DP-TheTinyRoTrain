@@ -62,7 +62,7 @@
                                         <td>{{i.class}}</td>
                                         <td>{{i.departureDate}}</td>
                                         <td>{{i.price}}</td>
-                                        <td><input class="updatebtn" (click)="buyTicket()"type="submit" value="Buy Ticket"></td>
+                                        <td><input class="updatebtn" (click)="buyTicket(i.trainId, i.wagonId,i.class,i.seats,i.departureDate, i.price)"type="submit" value="Buy Ticket"></td>
                                     </tr>
                             </tbody>
                         </table>
