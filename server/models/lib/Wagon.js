@@ -10,7 +10,7 @@ var wagonSchema = mongoose.Schema({
     type: {type: String, enum: types, "default": types[0]},
     price: Number,
     seats: [Boolean],
-    isAttached: {type: Boolean, "default":false}
+    attachedTo: { type: mongoose.Types.ObjectId, ref: 'Train' }
 },{
     collection: 'wagons'
 });
@@ -37,7 +37,7 @@ wagonSchema.pre("save",function(next) {
     if (this.totalSeatsNo <= 0)
         console.log("Invalid seats number " + this.totalSeatsNo);
     else {
-        if(!this.seats.length === this.totalSeatsNo){
+        if(this.seats.length === 0){
             this.freeSeatsNo = this.totalSeatsNo;
             for(let i = 0; i < this.totalSeatsNo; i++)
                  this.seats.push(true);

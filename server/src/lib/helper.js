@@ -28,6 +28,8 @@ module.exports.createResource = function(options, next){
     
     let transformData = options.transformData;
 
+    let afterCreate = options.afterCreate || undefined;
+
     Model.findOne(filter, function(error, doc){
         if(error)
             return next(serverError.InteralError(error));
@@ -43,8 +45,17 @@ module.exports.createResource = function(options, next){
             newDoc.save().then(() => {
                 responseFilter(newDoc, function(error, data){
                     if(error)
-                        return next(serverError.InteralError(error));  
-                    return next(null, data);
+                        return next(serverError.InteralError(error));
+                    if(afterCreate){
+                        afterCreate(data, function(error, ok){
+                            if(error)
+                                return next(serverError.InteralError(error));
+                            else
+                                return next(null, data);
+                        })
+                    }
+                    else 
+                        return next(null, data);
                 });
             });
 

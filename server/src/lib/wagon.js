@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const Promise = require('bluebird');
 const Model = require('./../../models').Wagon();
 const ModelTrain = require('./../../models').Train();
 const serverErrors = require('./error');
@@ -49,8 +50,31 @@ module.exports.getAllFilter = function(data){
     return data || {}   
 }
 
-module.exports.setAttachedFlag = function(id, value){
-    return Model.updateData({_id: id}, {isAttached: value}).exec();
+module.exports.attachedToTrain = function(data, next){
+   let wagons = data.wagons;
+   let trainid = data._id;
+   let workflow = new Promise((resolve, reject) =>{
+        wagons.forEach((wagonid, i, array) => {
+            let filter = {_id: wagonid};
+            let updateData = {attachedTo: trainid};
+            Model.updateOne(filter, updateData, function(error, data){
+                if(error)
+                    reject(error);
+                else
+                    if(i == array.length - 1)
+                        resolve();
+            });
+        });
+   });
+
+   workflow.then(()=>{
+       return next(null, true);
+   })
+   .catch((reason) =>{
+       return next(reason);
+   })
+
+    //return Model.updateData({_id: id}, {isAttached: value}).exec();
 }
 
 module.exports.getAllTypes = function(next){

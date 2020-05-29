@@ -1,4 +1,5 @@
 const lib = require('./../lib/train');
+const libWagon = require('./../lib/wagon');
 const helper = require('./../lib/helper');
 const authorize = require('./../authorizator/autz').authorize;
 
@@ -12,7 +13,8 @@ module.exports = {
                     data: data,
                     Model: lib.trainModel,
                     createFilter: lib.createFilter(data),
-                    responseFilter: lib.resposeFilter
+                    responseFilter: lib.resposeFilter,
+                    afterCreate: libWagon.attachedToTrain
                 }, next);
         });
     },
