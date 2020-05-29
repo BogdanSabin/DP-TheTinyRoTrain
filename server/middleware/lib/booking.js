@@ -3,8 +3,8 @@ const api = require('./../../src/api/booking');
 module.exports = {
     findSolution: function(req, next){
         let data = {
-            StationStart: req.body.StationStart,
-            StationEnd: req.body.StationEnd,
+            stationStart: req.body.stationStart,
+            stationEnd: req.body.stationEnd,
             numberOfTickets: req.body.numberOfTickets,
             wagonClass: req.body.wagonClass,
             departureData: req.body.departureData,

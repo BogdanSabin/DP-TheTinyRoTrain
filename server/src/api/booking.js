@@ -5,7 +5,7 @@ const authorize = require('./../authorizator/autz').authorize;
 module.exports = {
     
     findSolution: function(data, next){
-        return lib;
+        return lib.findSolution(data, next);
     },
 
     bookTicket: function(data, token, next){
